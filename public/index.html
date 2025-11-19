@@ -611,13 +611,20 @@
                 flex-direction: row; /* 가로 배치 */
                 text-align: left; /* 텍스트 좌측 정렬 */
                 padding: 4.5rem;
-                gap: 4rem;
+                gap: 2rem; /* 간격을 조금 줄여서 텍스트가 밀릴 공간 확보 */
                 align-items: center;
+                justify-content: flex-start; /* 기본값 변경하여 여백 제어 */
             }
 
             .hero-text-group {
                 text-align: left;
                 max-width: 55%;
+                /* [수정 핵심] 
+                   왼쪽 패딩을 크게 주어 텍스트를 1/3 지점까지 밀어냅니다.
+                   6rem은 약 96px 정도이며, 화면 크기에 따라 적절히 안쪽으로 들어오게 됩니다.
+                */
+                padding-left: 6rem; 
+                box-sizing: border-box;
             }
 
             .hero-stats {
@@ -627,6 +634,7 @@
             .hero-art-group {
                 max-width: 40%;
                 padding: 2.5rem;
+                margin-left: auto; /* 아트를 오른쪽으로 밀어 균형 맞춤 */
             }
         }
 
