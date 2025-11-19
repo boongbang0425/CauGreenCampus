@@ -14,37 +14,38 @@
         }
 
         :root {
-            --primary: #10B981;
-            --primary-dark: #059669;
-            --secondary: #0EA5E9;
-            --accent: #C41E3A;
-            --background: #F8FAFC;
-            --surface: #FFFFFF;
-            --text-primary: #1E293B;
-            --text-secondary: #64748B;
-            --text-light: #94A3B8;
-            --warning: #F59E0B;
-            --purple: #8B5CF6;
+            --sage-bg: #A8B89A;
+            --sage-light: #C4D4B6;
+            --sage-dark: #8FA07A;
+            --forest-green: #2D4A1C;
+            --forest-mid: #3D5A2C;
+            --white: #FFFFFF;
+            --pale-grey: #F0F0F0;
+            --warm-grey: #E5E5E5;
+            --text-dark: #2C3E2D;
+            --text-muted: #5A6B5A;
+            --text-light: #7A8B7A;
+            --shadow-float: 0 20px 60px rgba(45, 74, 28, 0.15);
+            --shadow-card: 0 8px 32px rgba(45, 74, 28, 0.08);
         }
 
         body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--background);
-            color: var(--text-primary);
+            background-color: var(--sage-bg);
+            color: var(--text-dark);
             line-height: 1.6;
         }
 
-        /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
             z-index: 1000;
             padding: 1rem 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-card);
         }
 
         .nav-container {
@@ -60,108 +61,131 @@
             align-items: center;
             gap: 0.75rem;
             text-decoration: none;
-            color: var(--text-primary);
+            color: var(--forest-green);
         }
 
-        .nav-brand .logo {
-            font-size: 1.75rem;
-        }
-
-        .nav-brand .brand-text {
-            font-weight: 700;
-            font-size: 1.25rem;
-        }
+        .nav-logo { width: 32px; height: 32px; }
+        .brand-text { font-weight: 700; font-size: 1.1rem; }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-weight: 500;
+            font-size: 0.9rem;
             transition: color 0.3s ease;
-            font-size: 0.95rem;
+            position: relative;
+            padding: 0.5rem 0;
         }
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--primary);
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--forest-green);
+            transition: width 0.3s ease;
         }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after { width: 100%; }
+
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--forest-green); }
 
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
             cursor: pointer;
         }
 
-        /* Main Content */
         .main-content {
             padding-top: 5rem;
             min-height: 100vh;
         }
 
-        /* Page Header */
         .page-header {
             text-align: center;
-            padding: 4rem 2rem 3rem;
-            background: linear-gradient(135deg, #F0FDF4 0%, #ECFEFF 100%);
+            padding: 3rem 2rem;
+            background: linear-gradient(180deg, var(--sage-bg) 0%, var(--sage-light) 100%);
         }
 
         .page-header h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .page-header h1 svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--forest-green);
         }
 
         .page-header p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 500px;
             margin: 0 auto;
         }
 
-        /* Calculator Container */
         .calculator-container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 2rem;
         }
 
-        /* Form Section */
         .form-section {
-            background: var(--surface);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.25rem;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+        }
+
+        .form-section:hover {
+            box-shadow: var(--shadow-float);
         }
 
         .form-section-header {
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 2px solid var(--background);
+            border-bottom: 2px solid var(--pale-grey);
         }
 
         .form-section-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
+            width: 44px;
+            height: 44px;
+            background: var(--pale-grey);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+        }
+
+        .form-section-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--forest-green);
         }
 
         .form-section-header h3 {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 600;
         }
 
@@ -169,320 +193,239 @@
             margin-bottom: 1.5rem;
         }
 
-        .form-group:last-child {
-            margin-bottom: 0;
-        }
+        .form-group:last-child { margin-bottom: 0; }
 
         .form-label {
             display: block;
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: 0.75rem;
-            color: var(--text-primary);
+            font-size: 0.9rem;
         }
 
         .form-sublabel {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+            font-size: 0.75rem;
+            color: var(--text-light);
             font-weight: 400;
+            margin-left: 0.5rem;
         }
 
-        /* Radio Group */
         .radio-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            gap: 0.6rem;
         }
 
-        .radio-option {
-            flex: 1;
-            min-width: 120px;
-        }
-
-        .radio-option input {
-            display: none;
-        }
+        .radio-option input { display: none; }
 
         .radio-option label {
-            display: block;
-            padding: 1rem;
-            background: var(--background);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.85rem 0.5rem;
+            background: var(--pale-grey);
             border: 2px solid transparent;
             border-radius: 12px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
+            font-size: 0.8rem;
+        }
+
+        .radio-option label svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-muted);
+            transition: stroke 0.3s ease;
         }
 
         .radio-option input:checked + label {
-            background: rgba(16, 185, 129, 0.1);
-            border-color: var(--primary);
-            color: var(--primary);
+            background: rgba(45, 74, 28, 0.1);
+            border-color: var(--forest-green);
+            color: var(--forest-green);
+        }
+
+        .radio-option input:checked + label svg {
+            stroke: var(--forest-green);
         }
 
         .radio-option label:hover {
-            border-color: var(--primary);
+            border-color: var(--sage-dark);
+            transform: translateY(-2px);
         }
 
-        /* Range Slider */
-        .range-container {
-            padding: 0.5rem 0;
-        }
+        .range-container { padding: 0.5rem 0; }
 
         .range-slider {
             width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: var(--background);
+            height: 6px;
+            border-radius: 3px;
+            background: var(--pale-grey);
             outline: none;
             -webkit-appearance: none;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
         }
 
         .range-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            background: var(--primary);
+            background: var(--forest-green);
             cursor: pointer;
-            box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 3px 8px rgba(45, 74, 28, 0.3);
         }
 
         .range-value {
             text-align: center;
             font-weight: 600;
-            color: var(--primary);
-            font-size: 1.1rem;
+            color: var(--forest-green);
+            font-size: 1rem;
         }
 
-        /* Calculate Button */
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+        }
+
         .calculate-btn {
             width: 100%;
-            padding: 1.25rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
+            padding: 1.1rem;
+            background: var(--forest-green);
+            color: var(--white);
             border: none;
             border-radius: 12px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(45, 74, 28, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
         }
 
         .calculate-btn:hover {
+            background: var(--forest-mid);
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
         }
 
-        .calculate-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
+        .calculate-btn svg {
+            width: 20px;
+            height: 20px;
         }
 
-        /* Results Section */
         .results-section {
             display: none;
-            animation: fadeIn 0.5s ease;
+            animation: fadeInUp 0.6s ease;
         }
 
-        .results-section.active {
-            display: block;
-        }
+        .results-section.active { display: block; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .result-card {
-            background: var(--surface);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.25rem;
+            box-shadow: var(--shadow-float);
         }
 
         .result-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .result-header h2 {
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
         }
 
         .total-emission {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--forest-green);
+            line-height: 1;
         }
 
         .emission-unit {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
         }
 
         .comparison-badge {
             display: inline-block;
             padding: 0.5rem 1rem;
             border-radius: 50px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             margin-top: 1rem;
         }
 
         .comparison-badge.high {
-            background: rgba(239, 68, 68, 0.1);
-            color: #EF4444;
+            background: rgba(180, 80, 80, 0.1);
+            color: #B45050;
         }
 
         .comparison-badge.average {
-            background: rgba(245, 158, 11, 0.1);
-            color: #F59E0B;
+            background: rgba(180, 140, 80, 0.1);
+            color: #B48C50;
         }
 
         .comparison-badge.low {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--primary);
+            background: rgba(45, 74, 28, 0.1);
+            color: var(--forest-green);
         }
 
-        /* Chart Container */
         .chart-container {
-            max-width: 300px;
-            margin: 2rem auto;
+            max-width: 260px;
+            margin: 1.5rem auto;
         }
 
-        /* Comparison Stats */
         .comparison-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 2px solid var(--background);
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--pale-grey);
         }
 
         .stat-item {
             text-align: center;
+            padding: 0.85rem;
+            background: var(--pale-grey);
+            border-radius: 10px;
         }
 
         .stat-value {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: var(--text-primary);
         }
 
         .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-top: 0.25rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
         }
 
-        /* Recommendations */
-        .recommendations {
-            margin-top: 2rem;
-        }
-
-        .recommendations h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .recommendation-item {
-            display: flex;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: var(--background);
-            border-radius: 16px;
-            margin-bottom: 1rem;
-            transition: transform 0.3s ease;
-        }
-
-        .recommendation-item:hover {
-            transform: translateX(5px);
-        }
-
-        .recommendation-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--surface);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .recommendation-content {
-            flex: 1;
-        }
-
-        .recommendation-content h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .recommendation-content p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.75rem;
-        }
-
-        .recommendation-meta {
-            display: flex;
-            gap: 1rem;
-            font-size: 0.8rem;
-        }
-
-        .saving {
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        .difficulty {
-            color: var(--warning);
-        }
-
-        /* Action Button */
-        .action-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-top: 1rem;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-        }
-
-        /* Footer */
         .footer {
-            background: var(--text-primary);
-            color: white;
-            padding: 3rem 2rem;
-            margin-top: 4rem;
+            background: var(--forest-green);
+            color: var(--white);
+            padding: 2rem;
+            margin-top: 3rem;
         }
 
         .footer-container {
@@ -492,30 +435,24 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .footer-brand {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.6rem;
         }
 
-        .footer-brand .logo {
-            font-size: 1.5rem;
-        }
-
-        .footer-brand span {
-            font-weight: 600;
-        }
+        .footer-brand svg { width: 24px; height: 24px; }
+        .footer-brand span { font-weight: 600; font-size: 0.9rem; }
 
         .footer-info {
             text-align: right;
-            font-size: 0.875rem;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -523,58 +460,43 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: white;
+                background: var(--white);
                 flex-direction: column;
-                padding: 1rem 2rem;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .page-header h1 {
-                font-size: 1.875rem;
-            }
-
-            .form-section {
                 padding: 1.5rem;
+                box-shadow: var(--shadow-card);
+                gap: 1rem;
             }
 
-            .radio-option {
-                min-width: calc(50% - 0.5rem);
-            }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
 
-            .comparison-stats {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
+            .page-header { padding: 2rem 1.5rem; }
+            .page-header h1 { font-size: 1.5rem; }
 
-            .total-emission {
-                font-size: 3rem;
-            }
+            .calculator-container { padding: 1rem; }
+            .form-section { padding: 1.5rem; }
+
+            .radio-group { grid-template-columns: repeat(2, 1fr); }
+            .comparison-stats { grid-template-columns: 1fr; }
+            .total-emission { font-size: 2.75rem; }
 
             .footer-container {
                 flex-direction: column;
                 text-align: center;
             }
 
-            .footer-info {
-                text-align: center;
-            }
+            .footer-info { text-align: center; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-brand">
-                <span class="logo">🌍</span>
+                <svg class="nav-logo" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="14" stroke="#2D4A1C" stroke-width="2"/>
+                    <path d="M16 6C16 6 20 12 20 18C20 22 18 26 16 26C14 26 12 22 12 18C12 12 16 6 16 6Z" fill="#2D4A1C"/>
+                </svg>
                 <span class="brand-text">CAU Green Campus</span>
             </a>
             <div class="nav-links" id="navLinks">
@@ -582,24 +504,40 @@
                 <a href="calculator.html" class="active">탄소계산기</a>
                 <a href="action.html">실천가이드</a>
             </div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2D4A1C" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Page Header -->
         <div class="page-header">
-            <h1>🌱 탄소발자국 계산기</h1>
-            <p>나의 생활 패턴을 입력하고, AI가 분석한 맞춤형 탄소 절감 방법을 확인하세요.</p>
+            <h1>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                    <path d="M7 13.5l-1.5 6L12 17l6.5 2.5L17 13.5"/>
+                    <circle cx="12" cy="8" r="2"/>
+                </svg>
+                탄소발자국 계산기
+            </h1>
+            <p>나의 생활 패턴을 입력하고, 맞춤형 탄소 절감 방법을 확인하세요.</p>
         </div>
 
-        <!-- Calculator -->
         <div class="calculator-container">
             <!-- Transport Section -->
             <div class="form-section">
                 <div class="form-section-header">
-                    <div class="form-section-icon">🚗</div>
+                    <div class="form-section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18 10l-3-4H9L6 10l-2.5 1.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2"/>
+                            <circle cx="7" cy="17" r="2"/>
+                            <circle cx="17" cy="17" r="2"/>
+                        </svg>
+                    </div>
                     <h3>이동</h3>
                 </div>
                 
@@ -608,19 +546,62 @@
                     <div class="radio-group">
                         <div class="radio-option">
                             <input type="radio" name="transport" id="car" value="car">
-                            <label for="car">🚗 자가용</label>
+                            <label for="car">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18 10l-3-4H9L6 10l-2.5 1.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2"/>
+                                    <circle cx="7" cy="17" r="2"/>
+                                    <circle cx="17" cy="17" r="2"/>
+                                </svg>
+                                자가용
+                            </label>
                         </div>
                         <div class="radio-option">
                             <input type="radio" name="transport" id="public" value="public" checked>
-                            <label for="public">🚌 대중교통</label>
+                            <label for="public">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <path d="M8 6v6M16 6v6M2 12h20M6 18h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/>
+                                    <circle cx="6" cy="18" r="2"/>
+                                    <circle cx="18" cy="18" r="2"/>
+                                </svg>
+                                버스
+                            </label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="transport" id="subway" value="subway">
+                            <label for="subway">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <rect x="4" y="3" width="16" height="16" rx="2"/>
+                                    <path d="M4 11h16"/>
+                                    <path d="M12 3v8"/>
+                                    <circle cx="8" cy="15" r="1"/>
+                                    <circle cx="16" cy="15" r="1"/>
+                                    <path d="M8 19l-2 3M16 19l2 3"/>
+                                </svg>
+                                지하철
+                            </label>
                         </div>
                         <div class="radio-option">
                             <input type="radio" name="transport" id="bike" value="bike">
-                            <label for="bike">🚲 자전거</label>
+                            <label for="bike">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <circle cx="5.5" cy="17.5" r="3.5"/>
+                                    <circle cx="18.5" cy="17.5" r="3.5"/>
+                                    <path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM12 17.5V14l-3-3 4-3 2 3h3"/>
+                                </svg>
+                                자전거
+                            </label>
                         </div>
                         <div class="radio-option">
                             <input type="radio" name="transport" id="walk" value="walk">
-                            <label for="walk">🚶 도보</label>
+                            <label for="walk">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <circle cx="12" cy="5" r="1"/>
+                                    <path d="M9 20l-2-6 3-3 2 4 3-6"/>
+                                    <path d="M6 20l3-9"/>
+                                    <path d="M14 20l1-5"/>
+                                </svg>
+                                도보
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -628,11 +609,15 @@
                 <div class="form-group">
                     <label class="form-label">
                         일일 통학 거리 (왕복)
-                        <span class="form-sublabel">집에서 학교까지 왕복 거리</span>
+                        <span class="form-sublabel">km</span>
                     </label>
                     <div class="range-container">
                         <input type="range" class="range-slider" id="distance" min="0" max="100" value="20">
                         <div class="range-value"><span id="distanceValue">20</span> km</div>
+                        <div class="range-labels">
+                            <span>0</span>
+                            <span>100</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -640,29 +625,82 @@
             <!-- Diet Section -->
             <div class="form-section">
                 <div class="form-section-header">
-                    <div class="form-section-icon">🍽️</div>
+                    <div class="form-section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                            <line x1="6" y1="1" x2="6" y2="4"/>
+                            <line x1="10" y1="1" x2="10" y2="4"/>
+                            <line x1="14" y1="1" x2="14" y2="4"/>
+                        </svg>
+                    </div>
                     <h3>식습관</h3>
                 </div>
                 
                 <div class="form-group">
+                    <label class="form-label">주간 육류 섭취 횟수</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" name="meatType" id="beef" value="beef" checked>
+                            <label for="beef">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <ellipse cx="12" cy="12" rx="10" ry="8"/>
+                                    <path d="M7 12c0-2 2-3 5-3s5 1 5 3"/>
+                                </svg>
+                                소고기
+                            </label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="meatType" id="pork" value="pork">
+                            <label for="pork">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <circle cx="12" cy="12" r="8"/>
+                                    <circle cx="9" cy="10" r="1"/>
+                                    <circle cx="15" cy="10" r="1"/>
+                                </svg>
+                                돼지고기
+                            </label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="meatType" id="chicken" value="chicken">
+                            <label for="chicken">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <path d="M12 4c-4 0-8 4-8 8s4 8 8 8 8-4 8-8-4-8-8-8z"/>
+                                    <path d="M9 9l-2-2M15 9l2-2"/>
+                                </svg>
+                                닭고기
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="form-label">
                         주간 육류 섭취 횟수
-                        <span class="form-sublabel">소고기, 돼지고기, 닭고기 등</span>
+                        <span class="form-sublabel">1회 약 150-200g</span>
                     </label>
                     <div class="range-container">
                         <input type="range" class="range-slider" id="meat" min="0" max="21" value="7">
                         <div class="range-value">주 <span id="meatValue">7</span>회</div>
+                        <div class="range-labels">
+                            <span>0</span>
+                            <span>21</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">
                         주간 배달 음식 횟수
-                        <span class="form-sublabel">포장 용기 포함</span>
+                        <span class="form-sublabel">일회용 용기 포함</span>
                     </label>
                     <div class="range-container">
                         <input type="range" class="range-slider" id="delivery" min="0" max="14" value="3">
                         <div class="range-value">주 <span id="deliveryValue">3</span>회</div>
+                        <div class="range-labels">
+                            <span>0</span>
+                            <span>14</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -670,18 +708,26 @@
             <!-- Energy Section -->
             <div class="form-section">
                 <div class="form-section-header">
-                    <div class="form-section-icon">⚡</div>
+                    <div class="form-section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </div>
                     <h3>에너지</h3>
                 </div>
                 
                 <div class="form-group">
                     <label class="form-label">
                         일일 냉난방 사용 시간
-                        <span class="form-sublabel">에어컨, 히터, 선풍기 등</span>
+                        <span class="form-sublabel">에어컨/히터</span>
                     </label>
                     <div class="range-container">
                         <input type="range" class="range-slider" id="hvac" min="0" max="12" value="4">
                         <div class="range-value">하루 <span id="hvacValue">4</span>시간</div>
+                        <div class="range-labels">
+                            <span>0</span>
+                            <span>12</span>
+                        </div>
                     </div>
                 </div>
 
@@ -690,15 +736,31 @@
                     <div class="radio-group">
                         <div class="radio-option">
                             <input type="radio" name="standby" id="standby-good" value="good">
-                            <label for="standby-good">✅ 관리함</label>
+                            <label for="standby-good">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                관리함
+                            </label>
                         </div>
                         <div class="radio-option">
                             <input type="radio" name="standby" id="standby-normal" value="normal" checked>
-                            <label for="standby-normal">➖ 보통</label>
+                            <label for="standby-normal">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <line x1="5" y1="12" x2="19" y2="12"/>
+                                </svg>
+                                보통
+                            </label>
                         </div>
                         <div class="radio-option">
                             <input type="radio" name="standby" id="standby-bad" value="bad">
-                            <label for="standby-bad">❌ 방치</label>
+                            <label for="standby-bad">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"/>
+                                    <line x1="6" y1="6" x2="18" y2="18"/>
+                                </svg>
+                                방치
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -707,18 +769,28 @@
             <!-- Consumption Section -->
             <div class="form-section">
                 <div class="form-section-header">
-                    <div class="form-section-icon">🛍️</div>
+                    <div class="form-section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                            <line x1="3" y1="6" x2="21" y2="6"/>
+                            <path d="M16 10a4 4 0 0 1-8 0"/>
+                        </svg>
+                    </div>
                     <h3>소비</h3>
                 </div>
                 
                 <div class="form-group">
                     <label class="form-label">
                         월간 새 옷 구매
-                        <span class="form-sublabel">의류, 신발, 가방 등</span>
+                        <span class="form-sublabel">의류/신발/가방</span>
                     </label>
                     <div class="range-container">
                         <input type="range" class="range-slider" id="clothing" min="0" max="10" value="2">
                         <div class="range-value">월 <span id="clothingValue">2</span>벌</div>
+                        <div class="range-labels">
+                            <span>0</span>
+                            <span>10</span>
+                        </div>
                     </div>
                 </div>
 
@@ -727,15 +799,31 @@
                     <div class="radio-group">
                         <div class="radio-option">
                             <input type="radio" name="disposable" id="disposable-low" value="low">
-                            <label for="disposable-low">거의 안함</label>
+                            <label for="disposable-low">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                                    <path d="M7 13.5l-1.5 6L12 17l6.5 2.5L17 13.5"/>
+                                </svg>
+                                거의 안함
+                            </label>
                         </div>
                         <div class="radio-option">
                             <input type="radio" name="disposable" id="disposable-normal" value="normal" checked>
-                            <label for="disposable-normal">보통</label>
+                            <label for="disposable-normal">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <line x1="5" y1="12" x2="19" y2="12"/>
+                                </svg>
+                                보통
+                            </label>
                         </div>
                         <div class="radio-option">
                             <input type="radio" name="disposable" id="disposable-high" value="high">
-                            <label for="disposable-high">자주</label>
+                            <label for="disposable-high">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                </svg>
+                                자주
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -743,16 +831,20 @@
 
             <!-- Calculate Button -->
             <button class="calculate-btn" id="calculateBtn">
-                🔍 내 탄소발자국 분석하기
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                내 탄소발자국 분석하기
             </button>
 
             <!-- Results Section -->
             <div class="results-section" id="resultsSection">
                 <div class="result-card">
                     <div class="result-header">
-                        <h2>📊 당신의 월간 탄소발자국</h2>
+                        <h2>당신의 월간 탄소발자국</h2>
                         <div class="total-emission" id="totalEmission">0</div>
-                        <div class="emission-unit">kg CO₂ / 월</div>
+                        <div class="emission-unit">kg CO₂-eq / 월</div>
                         <div class="comparison-badge" id="comparisonBadge"></div>
                     </div>
 
@@ -775,31 +867,17 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="result-card">
-                    <div class="recommendations">
-                        <h3>🎯 AI 맞춤 실천 가이드</h3>
-                        <div id="recommendationsList">
-                            <!-- Recommendations will be inserted here -->
-                        </div>
-                    </div>
-
-                    <div style="text-align: center; margin-top: 2rem;">
-                        <a href="action.html" class="action-btn">
-                            캠퍼스 실천 가이드 보기
-                            <span>→</span>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-brand">
-                <span class="logo">🌍</span>
+                <svg viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="14" stroke="white" stroke-width="2"/>
+                    <path d="M16 6C16 6 20 12 20 18C20 22 18 26 16 26C14 26 12 22 12 18C12 12 16 6 16 6Z" fill="white"/>
+                </svg>
                 <span>CAU Green Campus Action</span>
             </div>
             <div class="footer-info">
@@ -810,14 +888,11 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('active');
         });
 
-        // Range slider value updates
+        // Range slider updates
         const sliders = [
             { slider: 'distance', display: 'distanceValue' },
             { slider: 'meat', display: 'meatValue' },
@@ -834,13 +909,12 @@
             });
         });
 
-        // Carbon footprint calculation
         let emissionChart = null;
 
         function calculateFootprint() {
-            // Get values
             const transport = document.querySelector('input[name="transport"]:checked').value;
             const distance = parseInt(document.getElementById('distance').value);
+            const meatType = document.querySelector('input[name="meatType"]:checked').value;
             const meat = parseInt(document.getElementById('meat').value);
             const delivery = parseInt(document.getElementById('delivery').value);
             const hvac = parseInt(document.getElementById('hvac').value);
@@ -848,27 +922,38 @@
             const clothing = parseInt(document.getElementById('clothing').value);
             const disposable = document.querySelector('input[name="disposable"]:checked').value;
 
-            // Calculate emissions by category
-            // Transport (kg CO2 per month)
-            const transportFactors = { car: 0.21, public: 0.05, bike: 0, walk: 0 };
-            const transportEmission = distance * transportFactors[transport] * 22; // 22 days/month
+            // Transport emission factors (kg CO₂/km)
+            const transportFactors = {
+                car: 0.192,      // 휘발유 자가용
+                public: 0.12,   // 버스
+                subway: 0.035,  // 지하철
+                bike: 0,
+                walk: 0
+            };
+            const transportEmission = distance * transportFactors[transport] * 22; // 22일/월
 
-            // Diet (kg CO2 per month)
-            const meatEmission = meat * 6.5 * 4; // 6.5 kg CO2 per meal, 4 weeks
-            const deliveryEmission = delivery * 1.5 * 4; // 1.5 kg CO2 per delivery
+            // Diet emission factors (kg CO₂-eq/kg)
+            const meatFactors = {
+                beef: 27.42,    // 소고기
+                pork: 2.62,     // 돼지고기
+                chicken: 0.8    // 닭고기
+            };
+            const meatPerServing = 0.175; // 1회 175g
+            const meatEmission = meat * meatPerServing * meatFactors[meatType] * 4.3; // 주간 → 월간
+            const deliveryEmission = delivery * 0.0472 * 4.3; // 47.2g CO₂/회
             const dietEmission = meatEmission + deliveryEmission;
 
-            // Energy (kg CO2 per month)
-            const hvacEmission = hvac * 0.5 * 30; // 0.5 kg CO2 per hour
+            // Energy emission (0.4781 kg CO₂/kWh)
+            const hvacPower = 1; // 1kW 가정
+            const hvacEmission = hvac * 30 * hvacPower * 0.4781;
             const standbyFactors = { good: 5, normal: 15, bad: 30 };
             const energyEmission = hvacEmission + standbyFactors[standby];
 
-            // Consumption (kg CO2 per month)
-            const clothingEmission = clothing * 20; // 20 kg CO2 per item
-            const disposableFactors = { low: 5, normal: 15, high: 30 };
+            // Consumption emission
+            const clothingEmission = clothing * 2.6; // 2.6 kg CO₂/벌
+            const disposableFactors = { low: 1.05, normal: 3.15, high: 6.3 }; // 30/90/180개 × 3.5g
             const consumptionEmission = clothingEmission + disposableFactors[disposable];
 
-            // Total
             const total = Math.round(transportEmission + dietEmission + energyEmission + consumptionEmission);
 
             return {
@@ -876,98 +961,32 @@
                 transport: Math.round(transportEmission),
                 diet: Math.round(dietEmission),
                 energy: Math.round(energyEmission),
-                consumption: Math.round(consumptionEmission),
-                breakdown: {
-                    transport: ((transportEmission / total) * 100).toFixed(1),
-                    diet: ((dietEmission / total) * 100).toFixed(1),
-                    energy: ((energyEmission / total) * 100).toFixed(1),
-                    consumption: ((consumptionEmission / total) * 100).toFixed(1)
-                }
+                consumption: Math.round(consumptionEmission)
             };
-        }
-
-        function generateRecommendations(data) {
-            const recommendations = [];
-            const { transport, diet, energy, consumption } = data;
-
-            // Find the highest emission category
-            const categories = [
-                { name: 'transport', value: transport, label: '이동' },
-                { name: 'diet', value: diet, label: '식습관' },
-                { name: 'energy', value: energy, label: '에너지' },
-                { name: 'consumption', value: consumption, label: '소비' }
-            ].sort((a, b) => b.value - a.value);
-
-            // Generate recommendations based on highest categories
-            const recommendationData = {
-                transport: {
-                    icon: '🚌',
-                    title: '대중교통 또는 자전거 이용',
-                    description: '주 2회 이상 자가용 대신 대중교통이나 자전거를 이용해보세요. 중앙대 후문과 정문에 자전거 거치대가 있습니다.',
-                    saving: '월 15-30kg CO₂ 절감',
-                    difficulty: '⭐⭐'
-                },
-                diet: {
-                    icon: '🥗',
-                    title: '채식의 날 실천',
-                    description: '주 1-2회 채식 식단을 실천해보세요. 학생식당에서 채식 메뉴를 선택하거나, 배달 대신 직접 요리해보세요.',
-                    saving: '월 20-40kg CO₂ 절감',
-                    difficulty: '⭐'
-                },
-                energy: {
-                    icon: '🔌',
-                    title: '대기전력 차단하기',
-                    description: '사용하지 않는 전자기기의 플러그를 뽑고, 냉난방 온도를 1-2°C 조절해보세요.',
-                    saving: '월 10-20kg CO₂ 절감',
-                    difficulty: '⭐'
-                },
-                consumption: {
-                    icon: '♻️',
-                    title: '지속가능한 소비 실천',
-                    description: '새 옷 대신 중고거래를 활용하고, 텀블러와 다회용기를 사용해보세요. 중앙도서관 1층 카페에서 텀블러 할인을 받을 수 있습니다.',
-                    saving: '월 15-25kg CO₂ 절감',
-                    difficulty: '⭐⭐'
-                }
-            };
-
-            // Add top 3 recommendations
-            for (let i = 0; i < 3 && i < categories.length; i++) {
-                recommendations.push(recommendationData[categories[i].name]);
-            }
-
-            return recommendations;
         }
 
         function displayResults(data) {
-            // Show results section
             document.getElementById('resultsSection').classList.add('active');
-
-            // Update total emission
             document.getElementById('totalEmission').textContent = data.total;
             document.getElementById('yourEmission').textContent = data.total;
 
-            // Update comparison badge
             const badge = document.getElementById('comparisonBadge');
             const avg = 450;
-            const diff = ((data.total - avg) / avg * 100).toFixed(0);
+            const diff = Math.round(((data.total - avg) / avg) * 100);
             
             if (data.total > avg * 1.1) {
                 badge.textContent = `평균 대비 ${Math.abs(diff)}% 높음`;
                 badge.className = 'comparison-badge high';
             } else if (data.total < avg * 0.9) {
-                badge.textContent = `평균 대비 ${Math.abs(diff)}% 낮음 👏`;
+                badge.textContent = `평균 대비 ${Math.abs(diff)}% 낮음`;
                 badge.className = 'comparison-badge low';
             } else {
                 badge.textContent = '평균 수준';
                 badge.className = 'comparison-badge average';
             }
 
-            // Create/Update chart
             const ctx = document.getElementById('emissionChart').getContext('2d');
-            
-            if (emissionChart) {
-                emissionChart.destroy();
-            }
+            if (emissionChart) emissionChart.destroy();
 
             emissionChart = new Chart(ctx, {
                 type: 'doughnut',
@@ -975,59 +994,31 @@
                     labels: ['이동', '식습관', '에너지', '소비'],
                     datasets: [{
                         data: [data.transport, data.diet, data.energy, data.consumption],
-                        backgroundColor: ['#10B981', '#0EA5E9', '#F59E0B', '#8B5CF6'],
+                        backgroundColor: ['#7A8F6A', '#5A9B6B', '#8FAF78', '#6B8F5A'],
                         borderWidth: 0
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true,
                     plugins: {
                         legend: {
                             position: 'bottom',
                             labels: {
-                                padding: 20,
+                                padding: 16,
                                 usePointStyle: true,
-                                font: {
-                                    family: 'Pretendard'
-                                }
+                                font: { family: 'Pretendard', size: 11 }
                             }
                         }
                     },
-                    cutout: '60%'
+                    cutout: '65%'
                 }
             });
 
-            // Generate and display recommendations
-            const recommendations = generateRecommendations(data);
-            const recommendationsList = document.getElementById('recommendationsList');
-            recommendationsList.innerHTML = '';
-
-            recommendations.forEach(rec => {
-                const item = document.createElement('div');
-                item.className = 'recommendation-item';
-                item.innerHTML = `
-                    <div class="recommendation-icon">${rec.icon}</div>
-                    <div class="recommendation-content">
-                        <h4>${rec.title}</h4>
-                        <p>${rec.description}</p>
-                        <div class="recommendation-meta">
-                            <span class="saving">💚 ${rec.saving}</span>
-                            <span class="difficulty">난이도: ${rec.difficulty}</span>
-                        </div>
-                    </div>
-                `;
-                recommendationsList.appendChild(item);
-            });
-
-            // Scroll to results
-            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Calculate button click handler
         document.getElementById('calculateBtn').addEventListener('click', () => {
-            const data = calculateFootprint();
-            displayResults(data);
+            displayResults(calculateFootprint());
         });
     </script>
 </body>
