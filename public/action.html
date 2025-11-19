@@ -623,6 +623,14 @@
             gap: 1.5rem;
         }
 
+        /* [수정] .footer-main 정렬 추가 */
+        .footer-main {
+            width: 100%; /* 상단을 꽉 채우게 하여 Copyright를 아래로 밀어냄 */
+            display: flex;
+            justify-content: space-between; /* 내부 요소 양옆 배분 */
+            align-items: center; /* 수직 중앙 정렬 */
+        }
+
         .footer-brand {
             display: flex;
             align-items: center;
@@ -655,6 +663,7 @@
 
         /* 하단 라이센스 스타일 */
         .footer-copyright {
+            width: 100%; /* [수정] 너비를 100%로 주어 강제로 맨 아래로 줄바꿈 배치 */
             margin-top: 2rem;
             padding-top: 1rem;
             border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -723,6 +732,12 @@
                 text-align: center;
             }
 
+            /* [수정] 모바일용 footer-main 정렬 */
+            .footer-main {
+                flex-direction: column; /* 모바일에서는 세로 정렬 */
+                gap: 1.5rem;
+            }
+
             .footer-info { text-align: center; }
         }
     </style>
@@ -765,7 +780,6 @@
             <p>오늘부터 중앙대 캠퍼스에서 바로 실천할 수 있는 친환경 행동을 알아보세요.</p>
         </div>
 
-        <!-- Campus Facilities -->
         <section class="section campus-section">
             <div class="section-container">
                 <div class="section-header">
@@ -829,7 +843,6 @@
             </div>
         </section>
 
-        <!-- Programs -->
         <section class="section programs-section">
             <div class="section-container">
                 <div class="section-header">
@@ -900,7 +913,6 @@
             </div>
         </section>
 
-        <!-- Checklist -->
         <section class="section">
             <div class="section-container">
                 <div class="section-header">
@@ -1035,7 +1047,6 @@
             </div>
         </section>
 
-        <!-- Challenge -->
         <section class="section challenge-section">
             <div class="section-container">
                 <div class="section-header">
@@ -1089,7 +1100,6 @@
             </div>
         </section>
 
-        <!-- Timeline -->
         <section class="section timeline-section">
             <div class="section-container">
                 <div class="section-header">
