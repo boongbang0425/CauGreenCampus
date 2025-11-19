@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실천가이드 - CAU Green Campus</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --secondary: #0EA5E9;
+            --accent: #C41E3A;
+            --background: #F8FAFC;
+            --surface: #FFFFFF;
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --text-light: #94A3B8;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .nav-brand .logo {
+            font-size: 1.75rem;
+        }
+
+        .nav-brand .brand-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 5rem;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            background: linear-gradient(135deg, #F0FDF4 0%, #ECFEFF 100%);
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 4rem 2rem;
+        }
+
+        .section-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Campus Map Section */
+        .campus-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .campus-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .campus-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .campus-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.75rem;
+        }
+
+        .campus-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .campus-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .campus-effect {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Programs Section */
+        .programs-section {
+            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            color: white;
+        }
+
+        .programs-section .section-header h2,
+        .programs-section .section-header p {
+            color: white;
+        }
+
+        .programs-section .section-header p {
+            opacity: 0.7;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .program-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .program-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .program-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .program-icon {
+            font-size: 2rem;
+        }
+
+        .program-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .program-card p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .program-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--primary);
+        }
+
+        /* Checklist Section */
+        .checklist-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .checklist-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--background);
+        }
+
+        .checklist-item:hover {
+            transform: translateX(5px);
+        }
+
+        .checklist-item.checked {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--text-light);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item.checked .checklist-checkbox {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .checklist-content {
+            flex: 1;
+        }
+
+        .checklist-content h4 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .checklist-saving {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .checklist-total {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--background);
+        }
+
+        .checklist-total h3 {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .total-saving {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .total-unit {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Challenge Section */
+        .challenge-section {
+            background: linear-gradient(135deg, #ECFDF5 0%, #F0F9FF 100%);
+        }
+
+        .challenge-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(16, 185, 129, 0.15);
+        }
+
+        .challenge-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50px;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .challenge-card h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .challenge-details {
+            text-align: left;
+            margin: 1.5rem 0;
+        }
+
+        .challenge-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--background);
+        }
+
+        .challenge-detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .challenge-detail-item span:first-child {
+            font-weight: 600;
+            min-width: 60px;
+        }
+
+        .challenge-effect {
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .challenge-effect p {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background: var(--surface);
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--background);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            text-align: right;
+        }
+
+        .timeline-year {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: var(--surface);
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .timeline-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline-item:last-child .timeline-year {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            font-size: 1.25rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-brand .logo {
+            font-size: 1.5rem;
+        }
+
+        .footer-brand span {
+            font-weight: 600;
+        }
+
+        .footer-info {
+            text-align: right;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .campus-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 1.875rem;
+            }
+
+            .campus-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: row !important;
+                padding-left: 80px;
+            }
+
+            .timeline-content {
+                width: 100%;
+                text-align: left !important;
+            }
+
+            .timeline-year {
+                left: 30px;
+                width: 50px;
+                height: 50px;
+                font-size: 0.8rem;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-info {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <span class="logo">🌍</span>
+                <span class="brand-text">CAU Green Campus</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">홈</a>
+                <a href="calculator.html">탄소계산기</a>
+                <a href="action.html" class="active">실천가이드</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>🌱 캠퍼스 실천 가이드</h1>
+            <p>오늘부터 중앙대 캠퍼스에서 바로 실천할 수 있는 친환경 행동을 알아보세요.</p>
+        </div>
+
+        <!-- Campus Map Section -->
+        <section class="section">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>🗺️ 캠퍼스 친환경 시설</h2>
+                    <p>중앙대 곳곳에 있는 친환경 시설을 활용해보세요</p>
+                </div>
+                <div class="campus-grid">
+                    <div class="campus-card">
+                        <div class="campus-icon">🚰</div>
+                        <h3>텀블러 할인 카페</h3>
+                        <p>중앙도서관 1층, 학생회관 지하</p>
+                        <div class="campus-effect">1회 30g CO₂ 절감</div>
+                    </div>
+                    <div class="campus-card">
+                        <div class="campus-icon">♻️</div>
+                        <h3>분리수거 스테이션</h3>
+                        <p>각 건물 1층 로비</p>
+                        <div class="campus-effect">재활용률 40% 향상</div>
+                    </div>
+                    <div class="campus-card">
+                        <div class="campus-icon">🚲</div>
+                        <h3>자전거 거치대</h3>
+                        <p>정문, 후문, 기숙사 앞</p>
+                        <div class="campus-effect">교통 탄소 제로화</div>
+                    </div>
+                    <div class="campus-card">
+                        <div class="campus-icon">🌳</div>
+                        <h3>캠퍼스 숲 산책로</h3>
+                        <p>중앙광장 → 후문 구간</p>
+                        <div class="campus-effect">일일 1.2kg CO₂ 흡수</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programs Section -->
+        <section class="section programs-section">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>🌍 환경 프로그램 & 동아리</h2>
+                    <p>함께하면 더 큰 변화를 만들 수 있습니다</p>
+                </div>
+                <div class="programs-grid">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <span class="program-icon">🌱</span>
+                            <h3>그린캠퍼스</h3>
+                        </div>
+                        <p>캠퍼스 환경 개선 프로젝트를 진행하는 환경 동아리입니다. 분리수거 캠페인, 플로깅, 환경 교육 등 다양한 활동을 합니다.</p>
+                        <span class="program-tag">매 학기 초 모집</span>
+                    </div>
+                    <div class="program-card">
+                        <div class="program-header">
+                            <span class="program-icon">🌍</span>
+                            <h3>에코브릿지</h3>
+                        </div>
+                        <p>환경 봉사와 교육을 결합한 활동을 진행합니다. 지역 사회 환경 정화, 초등학교 환경 교육 등에 참여할 수 있습니다.</p>
+                        <span class="program-tag">홈페이지 상시 모집</span>
+                    </div>
+                    <div class="program-card">
+                        <div class="program-header">
+                            <span class="program-icon">📚</span>
+                            <h3>환경 교양 수업</h3>
+                        </div>
+                        <p>"기후변화와 에너지", "지속가능발전의 이해" 등 환경 관련 교양 수업을 통해 전문 지식을 쌓을 수 있습니다.</p>
+                        <span class="program-tag">수강신청 기간 확인</span>
+                    </div>
+                    <div class="program-card">
+                        <div class="program-header">
+                            <span class="program-icon">🏆</span>
+                            <h3>탄소중립 챌린지</h3>
+                        </div>
+                        <p>학교에서 주관하는 월간 환경 이벤트입니다. 참여 인증 시 소정의 상품과 마일리지를 받을 수 있습니다.</p>
+                        <span class="program-tag">포털 공지 확인</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checklist Section -->
+        <section class="section">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>✅ 일상 실천 체크리스트</h2>
+                    <p>오늘 실천한 항목을 체크하고 절감량을 확인하세요</p>
+                </div>
+                <div class="checklist-container">
+                    <div class="checklist-card">
+                        <div class="checklist-item" data-saving="30">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-content">
+                                <h4>🚰 텀블러 사용하기</h4>
+                                <span class="checklist-saving">30g CO₂/회</span>
+                            </div>
+                        </div>
+                        <div class="checklist-item" data-saving="10">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-content">
+                                <h4>📄 이면지 활용하기</h4>
+                                <span class="checklist-saving">10g CO₂/장</span>
+                            </div>
+                        </div>
+                        <div class="checklist-item" data-saving="15">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-content">
+                                <h4>🚶 계단 이용하기</h4>
+                                <span class="checklist-saving">15g CO₂/층</span>
+                            </div>
+                        </div>
+                        <div class="checklist-item" data-saving="100">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-content">
+                                <h4>❄️ 에어컨 26°C 설정</h4>
+                                <span class="checklist-saving">100g CO₂/시간</span>
+                            </div>
+                        </div>
+                        <div class="checklist-item" data-saving="5">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-content">
+                                <h4>📱 전자영수증 선택</h4>
+                                <span class="checklist-saving">5g CO₂/회</span>
+                            </div>
+                        </div>
+                        <div class="checklist-item" data-saving="200">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-content">
+                                <h4>🍽️ 잔반 없이 먹기</h4>
+                                <span class="checklist-saving">200g CO₂/식사</span>
+                            </div>
+                        </div>
+                        <div class="checklist-item" data-saving="50">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-content">
+                                <h4>🥡 다회용 용기 사용</h4>
+                                <span class="checklist-saving">50g CO₂/회</span>
+                            </div>
+                        </div>
+                        <div class="checklist-item" data-saving="150">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-content">
+                                <h4>🚌 대중교통 이용하기</h4>
+                                <span class="checklist-saving">150g CO₂/10km</span>
+                            </div>
+                        </div>
+
+                        <div class="checklist-total">
+                            <h3>오늘의 절감량</h3>
+                            <span class="total-saving" id="totalSaving">0</span>
+                            <span class="total-unit">g CO₂</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenge Section -->
+        <section class="section challenge-section">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>🎯 이달의 챌린지</h2>
+                    <p>함께 참여하고 더 큰 영향력을 만들어요</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-badge">🌿 11월 챌린지</span>
+                    <h3>NO 일회용 위크</h3>
+                    <div class="challenge-details">
+                        <div class="challenge-detail-item">
+                            <span>목표</span>
+                            <span>1주일간 일회용품 사용 제로</span>
+                        </div>
+                        <div class="challenge-detail-item">
+                            <span>기간</span>
+                            <span>11월 18일 ~ 11월 24일</span>
+                        </div>
+                        <div class="challenge-detail-item">
+                            <span>참여</span>
+                            <span>인스타그램 #CAU그린챌린지</span>
+                        </div>
+                        <div class="challenge-detail-item">
+                            <span>보상</span>
+                            <span>참여자 전원 에코백 증정</span>
+                        </div>
+                    </div>
+                    <div class="challenge-effect">
+                        <p>🌍 예상 효과: 참여자 100명 × 주간 2kg = 200kg CO₂ 절감</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="section timeline-section">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>📅 중앙대의 기후 대응 여정</h2>
+                    <p>1위를 향한 우리 대학의 노력</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>탄소중립 선언</h4>
+                            <p>2050년까지 캠퍼스 탄소중립 달성을 공식 선언했습니다.</p>
+                        </div>
+                        <div class="timeline-year">2020</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>인프라 전환</h4>
+                            <p>전체 건물 LED 조명 100% 전환, 태양광 패널 설치를 완료했습니다.</p>
+                        </div>
+                        <div class="timeline-year">2021</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>학생 참여 활성화</h4>
+                            <p>환경 동아리가 3개에서 7개로 확대되고, 학생 주도 캠페인이 활발해졌습니다.</p>
+                        </div>
+                        <div class="timeline-year">2022</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>제도 정비</h4>
+                            <p>친환경 구매 정책, 에너지 절감 인센티브 제도를 도입했습니다.</p>
+                        </div>
+                        <div class="timeline-year">2023</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>기후 대응 1위 달성</h4>
+                            <p>학술 + 인프라 + 참여 + 제도의 총체적 성과로 서울 20개 대학 중 1위를 달성했습니다.</p>
+                        </div>
+                        <div class="timeline-year">🏆</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="logo">🌍</span>
+                <span>CAU Green Campus Action</span>
+            </div>
+            <div class="footer-info">
+                <p>2025 생성형 AI 모델 활용 경진대회 2부</p>
+                <p>중앙대학교 교육혁신원</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Checklist functionality
+        const checklistItems = document.querySelectorAll('.checklist-item');
+        const totalSaving = document.getElementById('totalSaving');
+        let currentTotal = 0;
+
+        checklistItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const saving = parseInt(item.dataset.saving);
+                
+                if (item.classList.contains('checked')) {
+                    item.classList.remove('checked');
+                    item.querySelector('.checklist-checkbox').innerHTML = '';
+                    currentTotal -= saving;
+                } else {
+                    item.classList.add('checked');
+                    item.querySelector('.checklist-checkbox').innerHTML = '✓';
+                    currentTotal += saving;
+                }
+                
+                totalSaving.textContent = currentTotal;
+                
+                // Add animation
+                totalSaving.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    totalSaving.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
