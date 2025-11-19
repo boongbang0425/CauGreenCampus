@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>탄소발자국 계산기 - CAU Green Campus</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --secondary: #0EA5E9;
+            --accent: #C41E3A;
+            --background: #F8FAFC;
+            --surface: #FFFFFF;
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --text-light: #94A3B8;
+            --warning: #F59E0B;
+            --purple: #8B5CF6;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .nav-brand .logo {
+            font-size: 1.75rem;
+        }
+
+        .nav-brand .brand-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 5rem;
+            min-height: 100vh;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            background: linear-gradient(135deg, #F0FDF4 0%, #ECFEFF 100%);
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Calculator Container */
+        .calculator-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--background);
+        }
+
+        .form-section-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .form-section-header h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .form-sublabel {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        /* Radio Group */
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .radio-option {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .radio-option input {
+            display: none;
+        }
+
+        .radio-option label {
+            display: block;
+            padding: 1rem;
+            background: var(--background);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .radio-option input:checked + label {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .radio-option label:hover {
+            border-color: var(--primary);
+        }
+
+        /* Range Slider */
+        .range-container {
+            padding: 0.5rem 0;
+        }
+
+        .range-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--background);
+            outline: none;
+            -webkit-appearance: none;
+            margin-bottom: 0.5rem;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+        }
+
+        .range-value {
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        /* Calculate Button */
+        .calculate-btn {
+            width: 100%;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
+        }
+
+        .calculate-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Results Section */
+        .results-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .result-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .total-emission {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .emission-unit {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        .comparison-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .comparison-badge.high {
+            background: rgba(239, 68, 68, 0.1);
+            color: #EF4444;
+        }
+
+        .comparison-badge.average {
+            background: rgba(245, 158, 11, 0.1);
+            color: #F59E0B;
+        }
+
+        .comparison-badge.low {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            max-width: 300px;
+            margin: 2rem auto;
+        }
+
+        /* Comparison Stats */
+        .comparison-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--background);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* Recommendations */
+        .recommendations {
+            margin-top: 2rem;
+        }
+
+        .recommendations h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .recommendation-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--background);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .recommendation-item:hover {
+            transform: translateX(5px);
+        }
+
+        .recommendation-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--surface);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .recommendation-content {
+            flex: 1;
+        }
+
+        .recommendation-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .recommendation-content p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .recommendation-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .saving {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .difficulty {
+            color: var(--warning);
+        }
+
+        /* Action Button */
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-brand .logo {
+            font-size: 1.5rem;
+        }
+
+        .footer-brand span {
+            font-weight: 600;
+        }
+
+        .footer-info {
+            text-align: right;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 1.875rem;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+
+            .radio-option {
+                min-width: calc(50% - 0.5rem);
+            }
+
+            .comparison-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .total-emission {
+                font-size: 3rem;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-info {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <span class="logo">🌍</span>
+                <span class="brand-text">CAU Green Campus</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">홈</a>
+                <a href="calculator.html" class="active">탄소계산기</a>
+                <a href="action.html">실천가이드</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>🌱 탄소발자국 계산기</h1>
+            <p>나의 생활 패턴을 입력하고, AI가 분석한 맞춤형 탄소 절감 방법을 확인하세요.</p>
+        </div>
+
+        <!-- Calculator -->
+        <div class="calculator-container">
+            <!-- Transport Section -->
+            <div class="form-section">
+                <div class="form-section-header">
+                    <div class="form-section-icon">🚗</div>
+                    <h3>이동</h3>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">주요 통학 수단</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" name="transport" id="car" value="car">
+                            <label for="car">🚗 자가용</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="transport" id="public" value="public" checked>
+                            <label for="public">🚌 대중교통</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="transport" id="bike" value="bike">
+                            <label for="bike">🚲 자전거</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="transport" id="walk" value="walk">
+                            <label for="walk">🚶 도보</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        일일 통학 거리 (왕복)
+                        <span class="form-sublabel">집에서 학교까지 왕복 거리</span>
+                    </label>
+                    <div class="range-container">
+                        <input type="range" class="range-slider" id="distance" min="0" max="100" value="20">
+                        <div class="range-value"><span id="distanceValue">20</span> km</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diet Section -->
+            <div class="form-section">
+                <div class="form-section-header">
+                    <div class="form-section-icon">🍽️</div>
+                    <h3>식습관</h3>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        주간 육류 섭취 횟수
+                        <span class="form-sublabel">소고기, 돼지고기, 닭고기 등</span>
+                    </label>
+                    <div class="range-container">
+                        <input type="range" class="range-slider" id="meat" min="0" max="21" value="7">
+                        <div class="range-value">주 <span id="meatValue">7</span>회</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        주간 배달 음식 횟수
+                        <span class="form-sublabel">포장 용기 포함</span>
+                    </label>
+                    <div class="range-container">
+                        <input type="range" class="range-slider" id="delivery" min="0" max="14" value="3">
+                        <div class="range-value">주 <span id="deliveryValue">3</span>회</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Energy Section -->
+            <div class="form-section">
+                <div class="form-section-header">
+                    <div class="form-section-icon">⚡</div>
+                    <h3>에너지</h3>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        일일 냉난방 사용 시간
+                        <span class="form-sublabel">에어컨, 히터, 선풍기 등</span>
+                    </label>
+                    <div class="range-container">
+                        <input type="range" class="range-slider" id="hvac" min="0" max="12" value="4">
+                        <div class="range-value">하루 <span id="hvacValue">4</span>시간</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">대기전력 관리</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" name="standby" id="standby-good" value="good">
+                            <label for="standby-good">✅ 관리함</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="standby" id="standby-normal" value="normal" checked>
+                            <label for="standby-normal">➖ 보통</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="standby" id="standby-bad" value="bad">
+                            <label for="standby-bad">❌ 방치</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consumption Section -->
+            <div class="form-section">
+                <div class="form-section-header">
+                    <div class="form-section-icon">🛍️</div>
+                    <h3>소비</h3>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        월간 새 옷 구매
+                        <span class="form-sublabel">의류, 신발, 가방 등</span>
+                    </label>
+                    <div class="range-container">
+                        <input type="range" class="range-slider" id="clothing" min="0" max="10" value="2">
+                        <div class="range-value">월 <span id="clothingValue">2</span>벌</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">일회용품 사용 빈도</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" name="disposable" id="disposable-low" value="low">
+                            <label for="disposable-low">거의 안함</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="disposable" id="disposable-normal" value="normal" checked>
+                            <label for="disposable-normal">보통</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="disposable" id="disposable-high" value="high">
+                            <label for="disposable-high">자주</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calculate Button -->
+            <button class="calculate-btn" id="calculateBtn">
+                🔍 내 탄소발자국 분석하기
+            </button>
+
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection">
+                <div class="result-card">
+                    <div class="result-header">
+                        <h2>📊 당신의 월간 탄소발자국</h2>
+                        <div class="total-emission" id="totalEmission">0</div>
+                        <div class="emission-unit">kg CO₂ / 월</div>
+                        <div class="comparison-badge" id="comparisonBadge"></div>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="emissionChart"></canvas>
+                    </div>
+
+                    <div class="comparison-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">450</div>
+                            <div class="stat-label">한국 대학생 평균</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="yourEmission">0</div>
+                            <div class="stat-label">당신의 배출량</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">280</div>
+                            <div class="stat-label">탄소중립 목표</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <div class="recommendations">
+                        <h3>🎯 AI 맞춤 실천 가이드</h3>
+                        <div id="recommendationsList">
+                            <!-- Recommendations will be inserted here -->
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <a href="action.html" class="action-btn">
+                            캠퍼스 실천 가이드 보기
+                            <span>→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="logo">🌍</span>
+                <span>CAU Green Campus Action</span>
+            </div>
+            <div class="footer-info">
+                <p>2025 생성형 AI 모델 활용 경진대회 2부</p>
+                <p>중앙대학교 교육혁신원</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Range slider value updates
+        const sliders = [
+            { slider: 'distance', display: 'distanceValue' },
+            { slider: 'meat', display: 'meatValue' },
+            { slider: 'delivery', display: 'deliveryValue' },
+            { slider: 'hvac', display: 'hvacValue' },
+            { slider: 'clothing', display: 'clothingValue' }
+        ];
+
+        sliders.forEach(item => {
+            const slider = document.getElementById(item.slider);
+            const display = document.getElementById(item.display);
+            slider.addEventListener('input', () => {
+                display.textContent = slider.value;
+            });
+        });
+
+        // Carbon footprint calculation
+        let emissionChart = null;
+
+        function calculateFootprint() {
+            // Get values
+            const transport = document.querySelector('input[name="transport"]:checked').value;
+            const distance = parseInt(document.getElementById('distance').value);
+            const meat = parseInt(document.getElementById('meat').value);
+            const delivery = parseInt(document.getElementById('delivery').value);
+            const hvac = parseInt(document.getElementById('hvac').value);
+            const standby = document.querySelector('input[name="standby"]:checked').value;
+            const clothing = parseInt(document.getElementById('clothing').value);
+            const disposable = document.querySelector('input[name="disposable"]:checked').value;
+
+            // Calculate emissions by category
+            // Transport (kg CO2 per month)
+            const transportFactors = { car: 0.21, public: 0.05, bike: 0, walk: 0 };
+            const transportEmission = distance * transportFactors[transport] * 22; // 22 days/month
+
+            // Diet (kg CO2 per month)
+            const meatEmission = meat * 6.5 * 4; // 6.5 kg CO2 per meal, 4 weeks
+            const deliveryEmission = delivery * 1.5 * 4; // 1.5 kg CO2 per delivery
+            const dietEmission = meatEmission + deliveryEmission;
+
+            // Energy (kg CO2 per month)
+            const hvacEmission = hvac * 0.5 * 30; // 0.5 kg CO2 per hour
+            const standbyFactors = { good: 5, normal: 15, bad: 30 };
+            const energyEmission = hvacEmission + standbyFactors[standby];
+
+            // Consumption (kg CO2 per month)
+            const clothingEmission = clothing * 20; // 20 kg CO2 per item
+            const disposableFactors = { low: 5, normal: 15, high: 30 };
+            const consumptionEmission = clothingEmission + disposableFactors[disposable];
+
+            // Total
+            const total = Math.round(transportEmission + dietEmission + energyEmission + consumptionEmission);
+
+            return {
+                total,
+                transport: Math.round(transportEmission),
+                diet: Math.round(dietEmission),
+                energy: Math.round(energyEmission),
+                consumption: Math.round(consumptionEmission),
+                breakdown: {
+                    transport: ((transportEmission / total) * 100).toFixed(1),
+                    diet: ((dietEmission / total) * 100).toFixed(1),
+                    energy: ((energyEmission / total) * 100).toFixed(1),
+                    consumption: ((consumptionEmission / total) * 100).toFixed(1)
+                }
+            };
+        }
+
+        function generateRecommendations(data) {
+            const recommendations = [];
+            const { transport, diet, energy, consumption } = data;
+
+            // Find the highest emission category
+            const categories = [
+                { name: 'transport', value: transport, label: '이동' },
+                { name: 'diet', value: diet, label: '식습관' },
+                { name: 'energy', value: energy, label: '에너지' },
+                { name: 'consumption', value: consumption, label: '소비' }
+            ].sort((a, b) => b.value - a.value);
+
+            // Generate recommendations based on highest categories
+            const recommendationData = {
+                transport: {
+                    icon: '🚌',
+                    title: '대중교통 또는 자전거 이용',
+                    description: '주 2회 이상 자가용 대신 대중교통이나 자전거를 이용해보세요. 중앙대 후문과 정문에 자전거 거치대가 있습니다.',
+                    saving: '월 15-30kg CO₂ 절감',
+                    difficulty: '⭐⭐'
+                },
+                diet: {
+                    icon: '🥗',
+                    title: '채식의 날 실천',
+                    description: '주 1-2회 채식 식단을 실천해보세요. 학생식당에서 채식 메뉴를 선택하거나, 배달 대신 직접 요리해보세요.',
+                    saving: '월 20-40kg CO₂ 절감',
+                    difficulty: '⭐'
+                },
+                energy: {
+                    icon: '🔌',
+                    title: '대기전력 차단하기',
+                    description: '사용하지 않는 전자기기의 플러그를 뽑고, 냉난방 온도를 1-2°C 조절해보세요.',
+                    saving: '월 10-20kg CO₂ 절감',
+                    difficulty: '⭐'
+                },
+                consumption: {
+                    icon: '♻️',
+                    title: '지속가능한 소비 실천',
+                    description: '새 옷 대신 중고거래를 활용하고, 텀블러와 다회용기를 사용해보세요. 중앙도서관 1층 카페에서 텀블러 할인을 받을 수 있습니다.',
+                    saving: '월 15-25kg CO₂ 절감',
+                    difficulty: '⭐⭐'
+                }
+            };
+
+            // Add top 3 recommendations
+            for (let i = 0; i < 3 && i < categories.length; i++) {
+                recommendations.push(recommendationData[categories[i].name]);
+            }
+
+            return recommendations;
+        }
+
+        function displayResults(data) {
+            // Show results section
+            document.getElementById('resultsSection').classList.add('active');
+
+            // Update total emission
+            document.getElementById('totalEmission').textContent = data.total;
+            document.getElementById('yourEmission').textContent = data.total;
+
+            // Update comparison badge
+            const badge = document.getElementById('comparisonBadge');
+            const avg = 450;
+            const diff = ((data.total - avg) / avg * 100).toFixed(0);
+            
+            if (data.total > avg * 1.1) {
+                badge.textContent = `평균 대비 ${Math.abs(diff)}% 높음`;
+                badge.className = 'comparison-badge high';
+            } else if (data.total < avg * 0.9) {
+                badge.textContent = `평균 대비 ${Math.abs(diff)}% 낮음 👏`;
+                badge.className = 'comparison-badge low';
+            } else {
+                badge.textContent = '평균 수준';
+                badge.className = 'comparison-badge average';
+            }
+
+            // Create/Update chart
+            const ctx = document.getElementById('emissionChart').getContext('2d');
+            
+            if (emissionChart) {
+                emissionChart.destroy();
+            }
+
+            emissionChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['이동', '식습관', '에너지', '소비'],
+                    datasets: [{
+                        data: [data.transport, data.diet, data.energy, data.consumption],
+                        backgroundColor: ['#10B981', '#0EA5E9', '#F59E0B', '#8B5CF6'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                font: {
+                                    family: 'Pretendard'
+                                }
+                            }
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+
+            // Generate and display recommendations
+            const recommendations = generateRecommendations(data);
+            const recommendationsList = document.getElementById('recommendationsList');
+            recommendationsList.innerHTML = '';
+
+            recommendations.forEach(rec => {
+                const item = document.createElement('div');
+                item.className = 'recommendation-item';
+                item.innerHTML = `
+                    <div class="recommendation-icon">${rec.icon}</div>
+                    <div class="recommendation-content">
+                        <h4>${rec.title}</h4>
+                        <p>${rec.description}</p>
+                        <div class="recommendation-meta">
+                            <span class="saving">💚 ${rec.saving}</span>
+                            <span class="difficulty">난이도: ${rec.difficulty}</span>
+                        </div>
+                    </div>
+                `;
+                recommendationsList.appendChild(item);
+            });
+
+            // Scroll to results
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Calculate button click handler
+        document.getElementById('calculateBtn').addEventListener('click', () => {
+            const data = calculateFootprint();
+            displayResults(data);
+        });
+    </script>
+</body>
+</html>
