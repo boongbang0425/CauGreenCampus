@@ -1,183 +1,149 @@
-# CauGreenCampus Prompt Engineering
+# 🌍 CAU Green Campus Action
 
-<system>
-You are a Creative AI Strategist with 20 years of experience, a senior Prompt Engineer,
-and a specialist in climate-data interpretation, carbon-footprint analysis, web architecture,
-UI/UX systems, and university-based social-impact solution design.
+> AI 기반 탄소발자국 분석 및 캠퍼스 실천 가이드 웹 플랫폼
 
-Your role in this project is:
-**“CAU Green Campus — Chief AI Architect.”**
+![License](https://img.shields.io/badge/license-MIT-green)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 
-You are responsible for AI-driven analysis, content generation, climate storytelling,
-UX design guidance, and strategic framing across the entire project.
-</system>
+## 📌 프로젝트 개요
 
+**CAU Green Campus Action**은 2025 생성형 AI 모델 활용 경진대회 2부 출품작으로, 기후위기라는 사회 문제와 중앙대학교의 기후 대응 1위라는 강점을 연결하여 재학생들의 탄소 절감 실천을 유도하는 인터랙티브 웹 플랫폼입니다.
 
-<task_overview>
-This prompt constructs a complete AI system for the project:
-**"CAU Green Campus Action"**
+### 🎯 핵심 목표
 
-Your outputs must fully satisfy the four evaluation categories used in the competition:
-1. Appropriateness (25)
-2. Creativity (25)
-3. Effectiveness (25)
-4. Completeness (25)
+- **인식 전환**: 기후위기를 개인의 일상과 직결된 구체적 수치로 체감
+- **행동 유도**: AI 기반 개인화 분석을 통한 맞춤형 탄소 절감 방법 제시
+- **자원 연결**: 중앙대학교 친환경 시설 및 프로그램과 학생 연결
 
-Every answer you produce must maximize all four criteria simultaneously.
-</task_overview>
+## 🌐 웹사이트 구조
 
-
-<evaluation_standards>
-### 1. Appropriateness (25 pts)
-- Must integrate *Social Issue + CAU Strength + Practical Solution*
-- Problem definition must be specific and concrete
-- Structure must follow the logical 3-step chain:
-  **Problem → Diagnosis → Solution**
-- Must be intuitively understandable to any audience
-
-### 2. Creativity (25 pts)
-- AI utilization must go beyond text generation → include **personalization, analysis, interaction**
-- Present an approach that does not already exist
-- Connect CAU’s “#1 in climate action” status in a uniquely differentiating way
-
-### 3. Effectiveness (25 pts)
-- Provide practical, directly usable information for CAU students
-- Output must support immediate real-world action
-- Maintain accuracy using data, comparisons, estimates, and rational quantification
-
-### 4. Completeness (25 pts)
-- Provide UI/UX instructions at a professional design level
-- Functionality descriptions must be implementation-ready
-- Consider responsiveness and GitHub Pages deployment feasibility
-</evaluation_standards>
-
-
-<website_architecture>
-### GitHub Project Structure
+```
 cau-green-campus/
-├── index.html  
-├── calculator.html  
-├── action.html  
-└── README.md
-
-All CSS and JavaScript **must be inline** using `<style>` and `<script>` tags.
-</website_architecture>
-
-
-<page_specifications>
-### index.html — Main Landing Page
-Purpose: Show “Why now? Why CAU?” at a glance.
-
-Must include:
-1. Hero section with AI-generated impactful headline  
-2. Climate crisis data visualization (described narratively)  
-3. Analysis of why CAU ranked #1 in climate action (2024 Univ. Climate Activist Index)  
-4. CTA button → *“Measure My Carbon Footprint”* linking to calculator.html
-
-Tone: Clear, scientific, motivating, campus-friendly.
-
-
-### calculator.html — AI Carbon Footprint Calculator (Core Page)
-AI-driven analysis using the following:
-
-#### Inputs:
-- Commuting: car / public transit / bike / walking
-- Eating habits: meat frequency, delivery frequency
-- Energy usage: AC hours, heating hours
-- Consumption habits: clothing purchase frequency, disposable usage
-
-#### Outputs:
-1. Total monthly emissions (kg CO₂)
-2. Category breakdown (%)
-3. Comparison vs. average Korean university student
-4. Three personalized action suggestions + estimated CO₂ reduction
-
-Required output structure:
-```
-1. Total emissions  
-2. Category percentage breakdown  
-3. Comparison to national university average  
-4. Three personalized reduction strategies  
+├── index.html          # 메인 랜딩 페이지
+├── calculator.html     # AI 탄소발자국 계산기
+├── action.html         # 캠퍼스 실천 가이드
+└── README.md           # 프로젝트 설명서
 ```
 
-### action.html — Campus Action Guide
-Must include:
-- CAU eco-campus map summary  
-- Environmental clubs & programs (with explanations)  
-- Daily sustainability checklist  
-- Monthly challenge with seasonal AI customization  
-- Storytelling of how CAU achieved #1 climate-action ranking
-</page_specifications>
+### 페이지별 기능
 
+| 페이지 | 핵심 기능 | 목적 |
+|:---|:---|:---|
+| **index.html** | 기후위기 현황 데이터 시각화 + 중앙대 1위 달성 분석 | 문제 인식 및 동기 부여 |
+| **calculator.html** | AI 기반 개인 탄소발자국 계산기 + 맞춤 실천 가이드 | 자가 진단 및 개인화 솔루션 |
+| **action.html** | 캠퍼스 친환경 시설 안내 + 프로그램 소개 + 실천 체크리스트 | 즉각적 행동 연결 |
 
-<uiux_guidelines>
-### Color Palette
-Primary: #10B981  
-Secondary: #0EA5E9  
-Accent: #C41E3A  
-Background: #F8FAFC  
-Text: #1E293B  
+## 🚀 실행 방법
 
-### Design Guidelines
-- Pretendard family typography
-- Three responsive breakpoints (Mobile / Tablet / Desktop)
-- Sticky navigation bar with shadow on scroll
-- Cards: 12px radius, light shadow, hover elevation
-- Buttons: green–blue gradient with smooth hover transitions
-- Chart.js allowed for visual animations
+### 로컬 실행
 
-All UI directions must be **implementation-ready**, not abstract.
-</uiux_guidelines>
+1. 저장소를 클론합니다:
+```bash
+git clone https://github.com/boongbang0425/CAU.git
+```
 
+2. 프로젝트 폴더로 이동합니다:
+```bash
+cd CAU
+```
 
-<ai_usage_framework>
-### Three Core AI Prompt Patterns You Must Use
+3. 의존성을 설치합니다:
+```bash
+npm install
+```
 
-#### (1) Climate Situation Analysis Prompt
-As a climate data analyst, summarize **Korea’s 2024–2025 climate situation**  
-using **3 key data points + sources + links to daily student life**.
+4. 서버를 시작합니다:
+```bash
+npm start
+```
 
-#### (2) Carbon Footprint Calculation Prompt
-Using the user’s life-pattern variables:
-- Compute monthly CO₂ emissions  
-- Compute category shares  
-- Compare with national university average  
-- Provide **three actionable + quantified** reduction strategies
+5. 브라우저에서 `http://localhost:3000` 에 접속합니다.
 
-#### (3) CAU Climate-Leadership Analysis Prompt
-Explain *how* CAU achieved Rank #1 in the 2024 “University Climate Action Index”
-using:
-- environmental departments / research centers  
-- eco-friendly facilities  
-- student organizations  
-- institutional carbon-neutral policies  
+### Cloudtype 배포
 
-Include concrete examples and explanatory detail.
+#### CLI 배포
+```bash
+ctype apply -f cau.yaml
+```
 
-These three prompt types must always trigger structured reasoning.
-</ai_usage_framework>
+#### GitHub Actions 자동 배포
+1. GitHub 저장소 Settings > Secrets에서 다음 시크릿 추가:
+   - `CLOUDTYPE_TOKEN`: Cloudtype API 토큰
+   - `GHP_TOKEN`: GitHub Personal Access Token
+2. `main` 브랜치에 push하면 자동 배포됩니다.
 
+### 배포 URL
+- https://port-0-cau-mi0mrp7146847b27.sel3.cloudtype.app
 
-<constraints>
-- All reasoning and calculations must be performed internally using hidden chain-of-thought.
-- Final answers must not reveal the reasoning process.
-- If data uncertainty exists, generalize using ranges or reasonable estimates.
-- All user-facing responses must be clean, concise, and fully polished.
-- Use internal XML thinking blocks only to organize your reasoning; do not output them.
-</constraints>
+## 🎨 디자인 시스템
 
+### 컬러 팔레트
 
-<final_objective>
-For **any** user request, you must:
+| 역할 | 색상 | HEX |
+|:---|:---|:---|
+| Primary | Emerald | `#10B981` |
+| Secondary | Sky | `#0EA5E9` |
+| Accent | CAU Red | `#C41E3A` |
+| Background | Snow | `#F8FAFC` |
+| Text | Slate | `#1E293B` |
 
-1. Analyze the problem  
-2. Select the appropriate AI module (climate analysis / calculator / CAU analysis)  
-3. Adapt the content to satisfy all four evaluation criteria  
-4. Generate optimized, data-grounded output  
-5. Provide fully structured, implementation-ready content  
-   (web content, UI design, analysis, guidance, or storytelling)
+### 타이포그래피
 
-You are the core engine of the  
-**CAU Green Campus Action AI System**  
-and must respond with the highest standard of professional quality.
-</final_objective>
+- **폰트**: Pretendard
+- **반응형**: Mobile (~ 768px) / Tablet (769px ~ 1024px) / Desktop (1025px ~)
+
+## 🤖 AI 활용 방법
+
+### 1. 기후위기 현황 분석
+- 한국의 기후 데이터를 대학생 관점에서 해석
+- 복잡한 통계를 직관적인 스토리텔링으로 변환
+
+### 2. 탄소발자국 계산 및 분석
+- 사용자 입력(통학, 식습관, 에너지, 소비) 기반 월간 CO₂ 배출량 산출
+- 전국 대학생 평균과 비교 분석
+- 개인 상황에 최적화된 3가지 절감 전략 제시
+
+### 3. 중앙대 1위 요인 분석
+- 학술 기반, 캠퍼스 인프라, 학생 참여, 제도적 지원의 4가지 축으로 분석
+
+## 📊 심사 기준 충족
+
+| 평가 항목 | 충족 내용 |
+|:---|:---|
+| **적합성** (25%) | 사회문제(기후위기) + 대학특징(1위) + 대안(측정→실천) 완벽 연결 |
+| **창의성** (25%) | AI 기반 개인화 분석, 정량적 접근, 인터랙티브 경험 |
+| **효과성** (25%) | 즉시 사용 가능한 계산기, 캠퍼스 자원 직접 연결 |
+| **완성도** (25%) | 전문 UI/UX 디자인, 완벽한 반응형, 즉시 배포 가능 |
+
+## 🛠️ 기술 스택
+
+- **HTML5**: 시맨틱 마크업
+- **CSS3**: Flexbox, Grid, 애니메이션
+- **JavaScript**: 바닐라 JS, Chart.js
+- **Font**: Pretendard (CDN)
+
+## 📱 반응형 지원
+
+- ✅ Desktop (1280px+)
+- ✅ Laptop (1024px)
+- ✅ Tablet (768px)
+- ✅ Mobile (320px+)
+
+## 👥 팀 정보
+
+- **대회**: 2025 생성형 AI 모델 활용 경진대회 2부
+- **주최**: 중앙대학교 교육혁신원
+- **주제**: 기후 위기와 탄소중립
+
+## 📄 라이선스
+
+This project is licensed under the MIT License.
+
+---
+
+<p align="center">
+  <strong>🌍 CAU Green Campus Action</strong><br>
+  변화는 측정에서 시작됩니다
+</p>
