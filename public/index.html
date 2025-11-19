@@ -13,40 +13,39 @@
         }
 
         :root {
-            --primary: #10B981;
-            --primary-dark: #059669;
-            --secondary: #0EA5E9;
-            --accent: #C41E3A;
-            --background: #F8FAFC;
-            --surface: #FFFFFF;
-            --text-primary: #1E293B;
-            --text-secondary: #64748B;
-            --text-light: #94A3B8;
+            --sage-bg: #A8B89A;
+            --sage-light: #C4D4B6;
+            --sage-dark: #8FA07A;
+            --forest-green: #2D4A1C;
+            --forest-mid: #3D5A2C;
+            --white: #FFFFFF;
+            --pale-grey: #F0F0F0;
+            --warm-grey: #E5E5E5;
+            --text-dark: #2C3E2D;
+            --text-muted: #5A6B5A;
+            --text-light: #7A8B7A;
+            --shadow-float: 0 20px 60px rgba(45, 74, 28, 0.15);
+            --shadow-card: 0 8px 32px rgba(45, 74, 28, 0.08);
         }
 
         body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--background);
-            color: var(--text-primary);
+            background-color: var(--sage-bg);
+            color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
             z-index: 1000;
             padding: 1rem 2rem;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-card);
         }
 
         .nav-container {
@@ -62,71 +61,89 @@
             align-items: center;
             gap: 0.75rem;
             text-decoration: none;
-            color: var(--text-primary);
+            color: var(--forest-green);
         }
 
-        .nav-brand .logo {
-            font-size: 1.75rem;
-        }
+        .nav-logo { width: 32px; height: 32px; }
 
-        .nav-brand .brand-text {
+        .brand-text {
             font-weight: 700;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-weight: 500;
+            font-size: 0.9rem;
             transition: color 0.3s ease;
-            font-size: 0.95rem;
+            position: relative;
+            padding: 0.5rem 0;
         }
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--primary);
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--forest-green);
+            transition: width 0.3s ease;
         }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after { width: 100%; }
+
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--forest-green); }
 
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
             cursor: pointer;
+            padding: 0.5rem;
         }
 
-        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
             padding: 8rem 2rem 4rem;
-            background: linear-gradient(135deg, #F0FDF4 0%, #ECFEFF 50%, #F0F9FF 100%);
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        .floating-elements {
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
-            animation: pulse 15s ease-in-out infinite;
+            inset: 0;
+            pointer-events: none;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        .sphere {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pale-grey) 0%, var(--white) 100%);
+            box-shadow: var(--shadow-card);
+            animation: floatSphere 10s ease-in-out infinite;
+        }
+
+        .sphere:nth-child(1) { width: 50px; height: 50px; top: 12%; left: 8%; }
+        .sphere:nth-child(2) { width: 35px; height: 35px; top: 20%; right: 12%; animation-delay: 2s; }
+        .sphere:nth-child(3) { width: 70px; height: 70px; top: 8%; right: 22%; animation-delay: 4s; }
+        .sphere:nth-child(4) { width: 25px; height: 25px; bottom: 35%; left: 6%; animation-delay: 1s; }
+        .sphere:nth-child(5) { width: 40px; height: 40px; bottom: 25%; right: 8%; animation-delay: 3s; }
+
+        @keyframes floatSphere {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
         .hero-content {
@@ -135,61 +152,113 @@
             z-index: 1;
         }
 
+        .hero-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 4rem 3.5rem;
+            box-shadow: var(--shadow-float);
+            text-align: center;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-card:hover {
+            transform: translateY(-8px);
+        }
+
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            background: var(--surface);
-            padding: 0.5rem 1rem;
+            gap: 0.6rem;
+            background: var(--forest-green);
+            padding: 0.6rem 1.2rem;
             border-radius: 50px;
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            color: var(--primary);
+            color: var(--white);
             margin-bottom: 2rem;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.15);
         }
 
+        .badge-icon { width: 16px; height: 16px; }
+
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
+            font-size: 2.75rem;
+            font-weight: 700;
+            line-height: 1.3;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-dark) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--text-dark);
         }
 
         .hero p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
+            font-size: 1.05rem;
+            color: var(--text-muted);
             margin-bottom: 2.5rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--pale-grey);
+            border-bottom: 1px solid var(--pale-grey);
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--forest-green);
+            line-height: 1;
+            margin-bottom: 0.35rem;
+        }
+
+        .stat-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
         .btn-primary {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
+            gap: 0.75rem;
+            background: var(--forest-green);
+            color: var(--white);
             padding: 1rem 2rem;
             border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(45, 74, 28, 0.25);
         }
 
         .btn-primary:hover {
+            background: var(--forest-mid);
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
         }
 
-        /* Crisis Section */
+        .btn-primary svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover svg { transform: translateX(4px); }
+
         .section {
             padding: 6rem 2rem;
         }
@@ -201,216 +270,231 @@
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3.5rem;
         }
 
         .section-header h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
+            margin-bottom: 0.75rem;
         }
 
         .section-header p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
+            font-size: 1rem;
+            color: var(--text-muted);
         }
+
+        .crisis-section { background: var(--white); }
 
         .crisis-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .crisis-card {
-            background: var(--surface);
-            border-radius: 20px;
-            padding: 2.5rem;
+            background: var(--pale-grey);
+            border-radius: 16px;
+            padding: 2rem;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .crisis-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--forest-green);
+            border-radius: 16px 16px 0 0;
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
 
         .crisis-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            transform: translateY(-6px);
+            box-shadow: 0 16px 48px rgba(45, 74, 28, 0.12);
         }
 
+        .crisis-card:hover::before { transform: scaleX(1); }
+
         .crisis-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
-            border-radius: 20px;
+            width: 64px;
+            height: 64px;
+            background: var(--white);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2.5rem;
+            margin: 0 auto 1.25rem;
+            box-shadow: var(--shadow-card);
+        }
+
+        .crisis-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--forest-green);
         }
 
         .crisis-card h3 {
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--forest-green);
             margin-bottom: 0.5rem;
         }
 
         .crisis-card h4 {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .crisis-card p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
+            font-size: 0.85rem;
+            color: var(--text-muted);
             line-height: 1.6;
         }
 
         .crisis-source {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-light);
-            margin-top: 1rem;
+            margin-top: 0.75rem;
         }
 
-        /* CAU Pride Section */
         .cau-pride {
-            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
-            color: white;
+            background: var(--forest-green);
+            color: var(--white);
         }
 
-        .cau-pride .section-header h2 {
-            color: white;
-        }
-
-        .cau-pride .section-header p {
-            color: rgba(255, 255, 255, 0.7);
-        }
+        .cau-pride .section-header h2,
+        .cau-pride .section-header p { color: var(--white); }
+        .cau-pride .section-header p { opacity: 0.7; }
 
         .pride-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.75rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            padding: 1rem 2rem;
+            gap: 0.6rem;
+            background: var(--white);
+            color: var(--forest-green);
+            padding: 0.8rem 1.5rem;
             border-radius: 50px;
-            font-size: 1.25rem;
+            font-size: 1rem;
             font-weight: 700;
-            margin-bottom: 3rem;
+            margin-bottom: 1.5rem;
         }
 
         .factors-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+            gap: 1.25rem;
         }
 
         .factor-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 2rem;
+            border-radius: 14px;
+            padding: 1.75rem;
             text-align: center;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .factor-card:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.12);
             transform: translateY(-5px);
         }
 
         .factor-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .factor-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--sage-light);
         }
 
         .factor-card h4 {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: var(--primary);
+            margin-bottom: 0.5rem;
+            color: var(--sage-light);
         }
 
         .factor-card p {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
             line-height: 1.5;
         }
 
-        /* CTA Section */
-        .cta-section {
-            text-align: center;
-            padding: 8rem 2rem;
-            background: linear-gradient(135deg, #ECFDF5 0%, #F0F9FF 100%);
-        }
+        .cta-section { padding: 6rem 2rem; }
 
-        .cta-content {
-            max-width: 700px;
+        .cta-card {
+            max-width: 650px;
             margin: 0 auto;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-float);
         }
 
-        .cta-content h2 {
-            font-size: 2.5rem;
+        .cta-card h2 {
+            font-size: 2rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
 
-        .cta-content p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
+        .cta-card p {
+            font-size: 1rem;
+            color: var(--text-muted);
             margin-bottom: 2rem;
+            line-height: 1.7;
         }
 
-        /* Footer */
         .footer {
-            background: var(--text-primary);
-            color: white;
-            padding: 3rem 2rem;
+            background: var(--forest-green);
+            color: var(--white);
+            padding: 2rem;
         }
 
-        .footer-container {
-            max-width: 1280px;
-            margin: 0 auto;
+        .footer-container { max-width: 1280px; margin: 0 auto; }
+
+        .footer-main {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .footer-brand {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.6rem;
         }
 
-        .footer-brand .logo {
-            font-size: 1.5rem;
-        }
-
-        .footer-brand span {
-            font-weight: 600;
-        }
+        .footer-brand svg { width: 24px; height: 24px; }
+        .footer-brand span { font-weight: 600; font-size: 0.9rem; }
 
         .footer-info {
             text-align: right;
-            font-size: 0.875rem;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
         }
 
-        .footer-info p {
-            margin-bottom: 0.25rem;
-        }
-
-        /* Responsive */
         @media (max-width: 1024px) {
-            .factors-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .factors-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 2.25rem; }
         }
 
         @media (max-width: 768px) {
@@ -420,61 +504,41 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: white;
+                background: var(--white);
                 flex-direction: column;
-                padding: 1rem 2rem;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                padding: 1.5rem 2rem;
+                box-shadow: var(--shadow-card);
+                gap: 1rem;
             }
 
-            .nav-links.active {
-                display: flex;
-            }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .hero { padding: 6rem 1.5rem 3rem; }
+            .hero-card { padding: 2.5rem 1.5rem; }
+            .hero h1 { font-size: 1.75rem; }
+            .section { padding: 4rem 1.5rem; }
+            .crisis-grid { grid-template-columns: 1fr; }
+            .factors-grid { grid-template-columns: 1fr; }
+            .cta-card { padding: 2.5rem 1.5rem; }
 
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2.25rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .crisis-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .factors-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-header h2 {
-                font-size: 1.875rem;
-            }
-
-            .cta-content h2 {
-                font-size: 1.875rem;
-            }
-
-            .footer-container {
+            .footer-main {
                 flex-direction: column;
                 text-align: center;
             }
 
-            .footer-info {
-                text-align: center;
-            }
+            .footer-info { text-align: center; }
+            .sphere { display: none; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-brand">
-                <span class="logo">🌍</span>
+                <svg class="nav-logo" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="14" stroke="#2D4A1C" stroke-width="2"/>
+                    <path d="M16 6C16 6 20 12 20 18C20 22 18 26 16 26C14 26 12 22 12 18C12 12 16 6 16 6Z" fill="#2D4A1C"/>
+                </svg>
                 <span class="brand-text">CAU Green Campus</span>
             </a>
             <div class="nav-links" id="navLinks">
@@ -482,28 +546,60 @@
                 <a href="calculator.html">탄소계산기</a>
                 <a href="action.html">실천가이드</a>
             </div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2D4A1C" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
+        <div class="floating-elements">
+            <div class="sphere"></div>
+            <div class="sphere"></div>
+            <div class="sphere"></div>
+            <div class="sphere"></div>
+            <div class="sphere"></div>
+        </div>
+
         <div class="hero-content">
-            <div class="hero-badge">
-                <span>🏆</span>
-                <span>2024 대학 기후 대응 1위</span>
+            <div class="hero-card">
+                <div class="hero-badge">
+                    <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    <span>2024 서울 20개 대학 기후 대응 1위</span>
+                </div>
+                <h1>중앙대학교,<br>환경을 선도하다</h1>
+                <p class="hero-subtitle">대한민국 대학 기후 대응 평가 1위<br>탄소중립 캠퍼스를 향한 우리의 여정</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="stat-number">1위</span>
+                        <span class="stat-text">기후 대응</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-number">7개</span>
+                        <span class="stat-text">환경 동아리</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-number">2050</span>
+                        <span class="stat-text">탄소중립 목표</span>
+                    </div>
+                </div>
+                <a href="calculator.html" class="btn-primary">
+                    내 탄소발자국 측정하기
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
-            <h1>지구의 온도가 1.5°C 오르면,<br>우리의 일상은 얼마나 바뀔까요?</h1>
-            <p>중앙대학교가 대한민국 대학 기후 대응 1위를 달성한 비결,<br>그리고 당신이 오늘 할 수 있는 일을 알아보세요.</p>
-            <a href="calculator.html" class="btn-primary">
-                내 탄소발자국 측정하기
-                <span>→</span>
-            </a>
         </div>
     </section>
 
-    <!-- Crisis Section -->
-    <section class="section" id="crisis">
+    <section class="section crisis-section">
         <div class="section-container">
             <div class="section-header">
                 <h2>기후위기, 숫자로 보는 현실</h2>
@@ -511,121 +607,153 @@
             </div>
             <div class="crisis-grid">
                 <div class="crisis-card">
-                    <div class="crisis-icon">🌡️</div>
+                    <div class="crisis-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/>
+                        </svg>
+                    </div>
                     <h3>+1.8°C</h3>
                     <h4>한국 연평균 기온 상승</h4>
-                    <p>1912년부터 2023년까지 한국의 연평균 기온이 1.8°C 상승했습니다. 여름 폭염이 더 길어지고, 겨울이 짧아지는 이유입니다.</p>
+                    <p>1912년부터 2023년까지 한국의 연평균 기온이 1.8°C 상승했습니다.</p>
                     <div class="crisis-source">출처: 기상청 (2023)</div>
                 </div>
                 <div class="crisis-card">
-                    <div class="crisis-icon">💨</div>
+                    <div class="crisis-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 2v20M2 12h20"/>
+                        </svg>
+                    </div>
                     <h3>11.9톤</h3>
                     <h4>1인당 연간 탄소 배출량</h4>
-                    <p>한국인 1인당 연간 CO₂ 배출량은 11.9톤으로, OECD 평균의 약 2배입니다. 우리의 선택이 변화를 만듭니다.</p>
+                    <p>한국인 1인당 연간 CO₂ 배출량은 11.9톤으로, OECD 평균의 약 2배입니다.</p>
                     <div class="crisis-source">출처: 환경부 (2023)</div>
                 </div>
                 <div class="crisis-card">
-                    <div class="crisis-icon">🎯</div>
+                    <div class="crisis-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
                     <h3>-40%</h3>
                     <h4>2030 탄소 감축 목표</h4>
-                    <p>정부는 2030년까지 탄소 배출량을 40% 감축하는 목표를 세웠습니다. 대학생이 주도하는 변화가 필요한 이유입니다.</p>
+                    <p>정부는 2030년까지 탄소 배출량을 40% 감축하는 목표를 세웠습니다.</p>
                     <div class="crisis-source">출처: 정부 NDC (2021)</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CAU Pride Section -->
-    <section class="section cau-pride" id="pride">
+    <section class="section cau-pride">
         <div class="section-container">
             <div class="section-header">
                 <div class="pride-badge">
-                    <span>🏆</span>
-                    <span>기후위기 대응 실천 순위 1위</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    기후위기 대응 실천 순위 1위
                 </div>
                 <h2>중앙대학교는 어떻게 1위가 되었을까요?</h2>
-                <p>2024년 대학생 기후활동가 평가 결과, 서울시 내 20개 대학 중 1위를 달성한 4가지 비결</p>
+                <p>서울시 내 20개 대학 중 1위를 달성한 4가지 비결</p>
             </div>
             <div class="factors-grid">
                 <div class="factor-card">
-                    <div class="factor-icon">🎓</div>
+                    <div class="factor-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                        </svg>
+                    </div>
                     <h4>학술 기반</h4>
-                    <p>에너지시스템공학부, 도시시스템공학과 등 환경 관련 학과의 활발한 연구 활동</p>
+                    <p>환경 관련 학과의 활발한 연구 활동</p>
                 </div>
                 <div class="factor-card">
-                    <div class="factor-icon">🏢</div>
+                    <div class="factor-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <rect x="4" y="2" width="16" height="20" rx="2"/>
+                            <path d="M9 22v-4h6v4"/>
+                        </svg>
+                    </div>
                     <h4>캠퍼스 인프라</h4>
-                    <p>태양광 패널 설치, LED 조명 100% 전환, 고효율 분리수거 시스템 구축</p>
+                    <p>태양광 패널, LED 조명 100% 전환</p>
                 </div>
                 <div class="factor-card">
-                    <div class="factor-icon">🌱</div>
+                    <div class="factor-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
                     <h4>학생 참여</h4>
-                    <p>그린캠퍼스, 에코브릿지 등 환경 동아리 7개 운영 및 활발한 캠페인 활동</p>
+                    <p>환경 동아리 7개 운영 및 캠페인</p>
                 </div>
                 <div class="factor-card">
-                    <div class="factor-icon">📋</div>
+                    <div class="factor-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <path d="M14 2v6h6M16 13H8M16 17H8"/>
+                        </svg>
+                    </div>
                     <h4>제도적 지원</h4>
-                    <p>2050 탄소중립 선언, 친환경 구매 정책, 에너지 절감 인센티브 제도 운영</p>
+                    <p>2050 탄소중립 선언, 인센티브 제도</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="cta-section">
-        <div class="cta-content">
+        <div class="cta-card">
             <h2>변화는 측정에서 시작됩니다</h2>
-            <p>나의 탄소발자국을 확인하고, 오늘부터 캠퍼스에서 실천해보세요.<br>작은 변화가 모여 큰 차이를 만듭니다.</p>
+            <p>나의 탄소발자국을 확인하고, 오늘부터 캠퍼스에서 실천해보세요.</p>
             <a href="calculator.html" class="btn-primary">
                 탄소발자국 계산하기
-                <span>→</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
             </a>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
-            <div class="footer-brand">
-                <span class="logo">🌍</span>
-                <span>CAU Green Campus Action</span>
-            </div>
-            <div class="footer-info">
-                <p>2025 생성형 AI 모델 활용 경진대회 2부</p>
-                <p>중앙대학교 교육혁신원</p>
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <svg viewBox="0 0 32 32" fill="none">
+                        <circle cx="16" cy="16" r="14" stroke="white" stroke-width="2"/>
+                        <path d="M16 6C16 6 20 12 20 18C20 22 18 26 16 26C14 26 12 22 12 18C12 12 16 6 16 6Z" fill="white"/>
+                    </svg>
+                    <span>CAU Green Campus Action</span>
+                </div>
+                <div class="footer-info">
+                    <p>2025 생성형 AI 모델 활용 경진대회 2부</p>
+                    <p>중앙대학교 교육혁신원</p>
+                </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('active');
         });
 
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.crisis-card, .factor-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
         });
     </script>
 </body>
