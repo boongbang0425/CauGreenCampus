@@ -461,20 +461,29 @@
             line-height: 1.7;
         }
 
+        /* Footer Styles */
         .footer {
             background: var(--forest-green);
             color: var(--white);
             padding: 2rem;
         }
 
-        .footer-container { max-width: 1280px; margin: 0 auto; }
-
-        .footer-main {
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 1.5rem;
+        }
+
+        /* [수정] footer-main 스타일: 상단 영역을 꽉 채우고 좌우 정렬 */
+        .footer-main {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .footer-brand {
@@ -498,16 +507,16 @@
             gap: 0.5rem;
         }
 
-        /* 학생 명단 스타일 */
         .student-list {
             font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.4;
-            margin-left: 34px; /* 로고 아이콘 너비 + 간격만큼 들여쓰기 */
+            margin-left: 34px;
         }
 
-        /* 하단 라이센스 스타일 */
+        /* [수정] footer-copyright 스타일: width 100%로 강제 줄바꿈 */
         .footer-copyright {
+            width: 100%;
             margin-top: 2rem;
             padding-top: 1rem;
             border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -516,10 +525,10 @@
             color: rgba(255, 255, 255, 0.5);
         }
 
-        /* 모바일 반응형 추가 수정 */
+        /* 모바일 반응형 */
         @media (max-width: 768px) {
             .student-list {
-                margin-left: 0; /* 모바일에서는 가운데 정렬되므로 들여쓰기 제거 */
+                margin-left: 0;
                 margin-bottom: 1rem;
             }
         }
@@ -553,9 +562,15 @@
             .factors-grid { grid-template-columns: 1fr; }
             .cta-card { padding: 2.5rem 1.5rem; }
 
-            .footer-main {
+            .footer-container {
                 flex-direction: column;
                 text-align: center;
+            }
+
+            /* [수정] 모바일용 footer-main 정렬 */
+            .footer-main {
+                flex-direction: column;
+                gap: 1.5rem;
             }
 
             .footer-info { text-align: center; }
