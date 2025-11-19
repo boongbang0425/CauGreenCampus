@@ -34,7 +34,6 @@
             background-color: var(--sage-bg);
             color: var(--text-dark);
             line-height: 1.6;
-            overflow-y: scroll; /* 스크롤바 항상 표시 (스크롤바 가시성 문제 해결) */
         }
 
         .navbar {
@@ -422,36 +421,6 @@
             margin-top: 0.2rem;
         }
 
-        /* index.html에서 가져온 버튼 스타일 시작 */
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            background: var(--forest-green);
-            color: var(--white);
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 24px rgba(45, 74, 28, 0.25);
-        }
-
-        .btn-primary:hover {
-            background: var(--forest-mid);
-            transform: translateY(-3px);
-        }
-
-        .btn-primary svg {
-            width: 18px;
-            height: 18px;
-            transition: transform 0.3s ease;
-        }
-
-        .btn-primary:hover svg { transform: translateX(4px); }
-        /* index.html에서 가져온 버튼 스타일 끝 */
-
         .footer {
             background: var(--forest-green);
             color: var(--white);
@@ -559,6 +528,7 @@
         </div>
 
         <div class="calculator-container">
+            <!-- Transport Section -->
             <div class="form-section">
                 <div class="form-section-header">
                     <div class="form-section-icon">
@@ -652,6 +622,7 @@
                 </div>
             </div>
 
+            <!-- Diet Section -->
             <div class="form-section">
                 <div class="form-section-header">
                     <div class="form-section-icon">
@@ -667,7 +638,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">주간 육류 섭취</label>
+                    <label class="form-label">주간 육류 섭취 횟수</label>
                     <div class="radio-group">
                         <div class="radio-option">
                             <input type="radio" name="meatType" id="beef" value="beef" checked>
@@ -734,6 +705,7 @@
                 </div>
             </div>
 
+            <!-- Energy Section -->
             <div class="form-section">
                 <div class="form-section-header">
                     <div class="form-section-icon">
@@ -794,6 +766,7 @@
                 </div>
             </div>
 
+            <!-- Consumption Section -->
             <div class="form-section">
                 <div class="form-section-header">
                     <div class="form-section-icon">
@@ -856,6 +829,7 @@
                 </div>
             </div>
 
+            <!-- Calculate Button -->
             <button class="calculate-btn" id="calculateBtn">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="11" cy="11" r="8"/>
@@ -864,6 +838,7 @@
                 내 탄소발자국 분석하기
             </button>
 
+            <!-- Results Section -->
             <div class="results-section" id="resultsSection">
                 <div class="result-card">
                     <div class="result-header">
@@ -891,16 +866,6 @@
                             <div class="stat-label">탄소중립 목표</div>
                         </div>
                     </div>
-                    
-                    <div style="text-align: center; margin-top: 2rem;">
-                        <a href="action.html" class="btn-primary">
-                            나만을 위한 실천 가이드 보러가기
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                    
                 </div>
             </div>
         </div>
