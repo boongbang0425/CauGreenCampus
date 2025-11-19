@@ -486,11 +486,30 @@
         .footer-brand svg { width: 24px; height: 24px; }
         .footer-brand span { font-weight: 600; font-size: 0.9rem; }
 
+        /* 최하단 디자인 */
         .footer-info {
-            text-align: right;
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
+            text-align: right;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* 추가: 팀원 정보 스타일 */
+        .footer-team {
+            font-size: 0.65rem; /* 더 작은 글씨 */
+            line-height: 1.4;
+            margin-top: 0.5rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* 추가: 라이센스 컨테이너 스타일 */
+        .footer-license {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+        }
 
         @media (max-width: 1024px) {
             .factors-grid { grid-template-columns: repeat(2, 1fr); }
@@ -510,6 +529,7 @@
                 box-shadow: var(--shadow-card);
                 gap: 1rem;
             }
+            
 
             .nav-links.active { display: flex; }
             .mobile-menu-btn { display: block; }
@@ -717,23 +737,31 @@
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-main">
-                <div class="footer-brand">
-                    <svg viewBox="0 0 32 32" fill="none">
-                        <circle cx="16" cy="16" r="14" stroke="white" stroke-width="2"/>
-                        <path d="M16 6C16 6 20 12 20 18C20 22 18 26 16 26C14 26 12 22 12 18C12 12 16 6 16 6Z" fill="white"/>
-                    </svg>
-                    <span>CAU Green Campus Action</span>
-                </div>
-                <div class="footer-info">
-                    <p>2025 생성형 AI 모델 활용 경진대회 2부</p>
-                    <p>중앙대학교 교육혁신원</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+<footer class="footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <svg viewBox="0 0 32 32" fill="none">
+                        <circle cx="16" cy="16" r="14" stroke="white" stroke-width="2"/>
+                        <path d="M16 6C16 6 20 12 20 18C20 22 18 26 16 26C14 26 12 22 12 18C12 12 16 6 16 6Z" fill="white"/>
+                    </svg>
+                    <span>CAU Green Campus Action</span>
+                                        <div class="footer-team">
+                        <p>20195432 임병현</p>
+                        <p>20215427 엄지용</p>
+                        <p>20233265 후쿠다 나나호(ふくだ　ななほ)</p>
+                    </div>
+                </div>
+                <div class="footer-info">
+                    <p>2025 생성형 AI 모델 활용 경진대회 2부</p>
+                    <p>중앙대학교 교육혁신원</p>
+                </div>
+            </div>
+                        <div class="footer-license">
+                © 2025 CAU Green Campus Action. All rights reserved. Content is licensed under CC BY-NC 4.0.
+            </div>
+        </div>
+    </footer>
 
     <script>
         document.getElementById('mobileMenuBtn').addEventListener('click', () => {
