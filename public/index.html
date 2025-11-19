@@ -492,6 +492,38 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
+        .footer-left-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        /* 학생 명단 스타일 */
+        .student-list {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.4;
+            margin-left: 34px; /* 로고 아이콘 너비 + 간격만큼 들여쓰기 */
+        }
+
+        /* 하단 라이센스 스타일 */
+        .footer-copyright {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* 모바일 반응형 추가 수정 */
+        @media (max-width: 768px) {
+            .student-list {
+                margin-left: 0; /* 모바일에서는 가운데 정렬되므로 들여쓰기 제거 */
+                margin-bottom: 1rem;
+            }
+        }
+        
         @media (max-width: 1024px) {
             .factors-grid { grid-template-columns: repeat(2, 1fr); }
             .hero h1 { font-size: 2.25rem; }
@@ -720,17 +752,29 @@
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-main">
-                <div class="footer-brand">
-                    <svg viewBox="0 0 32 32" fill="none">
-                        <circle cx="16" cy="16" r="14" stroke="white" stroke-width="2"/>
-                        <path d="M16 6C16 6 20 12 20 18C20 22 18 26 16 26C14 26 12 22 12 18C12 12 16 6 16 6Z" fill="white"/>
-                    </svg>
-                    <span>CAU Green Campus Action</span>
+                <div class="footer-left-group">
+                    <div class="footer-brand">
+                        <svg viewBox="0 0 32 32" fill="none">
+                            <circle cx="16" cy="16" r="14" stroke="white" stroke-width="2"/>
+                            <path d="M16 6C16 6 20 12 20 18C20 22 18 26 16 26C14 26 12 22 12 18C12 12 16 6 16 6Z" fill="white"/>
+                        </svg>
+                        <span>CAU Green Campus Action</span>
+                    </div>
+                    <div class="student-list">
+                        <div>20195432 임병현</div>
+                        <div>20215427 엄지용</div>
+                        <div>20233265 후쿠다 나나호(ふくだ　ななほ)</div>
+                    </div>
                 </div>
+
                 <div class="footer-info">
                     <p>2025 생성형 AI 모델 활용 경진대회 2부</p>
                     <p>중앙대학교 교육혁신원</p>
                 </div>
+            </div>
+            
+            <div class="footer-copyright">
+                Copyright © 2025 CAU Green Campus Action. All rights reserved.
             </div>
         </div>
     </footer>
